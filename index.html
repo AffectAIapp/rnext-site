@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -280,13 +281,20 @@
         grid-template-columns:1fr;
         gap:52px;
       }
+
+      /* AJUSTE SOLICITADO: texto centralizado no mobile */
       .contact-block{
-        text-align:left;
+        text-align:center;
         max-width:none;
       }
+      .addr{
+        text-align:center;
+      }
+
       .slash-title{
         font-size:58px;
         margin-bottom:26px;
+        text-align:center;
       }
     }
 
@@ -333,7 +341,7 @@
     </section>
 
     <section id="sobre" style="padding:64px 0;">
-      <div class="wrap" style="max-width: 920px;">
+      <div class="wrap" style="max-width: 920px; text-align:center;">
         <h2 style="font-family: var(--oswald); font-size: 36px; letter-spacing: .02em; margin: 0 0 14px 0;">Sobre</h2>
         <p style="margin:0; color: var(--muted); line-height: 1.9; font-size: 16px;">
           Uma agência focada em ideias que viram resultado. Estratégia, criação e execução com obsessão por impacto.
@@ -342,7 +350,7 @@
     </section>
 
     <section id="trabalhos" style="padding:64px 0; border-top:1px solid rgba(17,24,39,.08);">
-      <div class="wrap" style="max-width: 920px;">
+      <div class="wrap" style="max-width: 920px; text-align:center;">
         <h2 style="font-family: var(--oswald); font-size: 36px; letter-spacing: .02em; margin: 0 0 14px 0;">Trabalhos</h2>
         <p style="margin:0; color: var(--muted); line-height: 1.9; font-size: 16px;">
           Selecione seus cases e substitua este texto quando quiser. A seção está pronta para receber grid, cards ou links.
@@ -420,3 +428,4 @@
   </script>
 </body>
 </html>
+```
