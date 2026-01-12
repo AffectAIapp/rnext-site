@@ -1,415 +1,214 @@
-```html
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>R/Next</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R/Next</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Oswald:wght@400;500&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
+<style>
+:root{
+  --yellow:#f5a623;
+  --text:#111;
+  --muted:#8a8a8a;
+  --black:#0b0b0b;
+  --max:1200px;
+}
 
-      --black:#0b0b0b;
-      --nav:#9aa0a6;
-      --accent:#f5a623;
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Montserrat,system-ui;background:#fff;color:var(--text)}
 
-      --shadow:0 18px 40px rgba(0,0,0,.16);
-      --radius:18px;
+a{text-decoration:none;color:inherit}
 
-      --font:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --max:1200px;
+.wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
 
-      --headerH:96px;
-      --headerPadX:34px;
-    }
+/* HEADER */
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  background:#fff;
+  z-index:100;
+}
+.header-inner{
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo img{
+  height:64px;
+}
+nav{
+  display:flex;
+  gap:48px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+nav a{color:#aaa;transition:color .2s}
+nav a.active,nav a:hover{color:var(--yellow)}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+/* HERO */
+.hero{
+  height:calc(100vh - 120px);
+  margin-top:120px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:url("https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1599845625533-7BA5RTRGQAHAZMLSER2F/BANNER.jpg") center/cover no-repeat;
+  transform:scale(1.05);
+  transition:transform .6s ease-out;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.35);
+}
+.hero-content{
+  position:relative;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  padding:0 24px;
+}
+.hero h1{
+  font-family:Oswald;
+  font-size:64px;
+  font-weight:400;
+  margin:0 0 24px;
+}
+.hero-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:54px;
+  padding:0 36px;
+  border:2px solid rgba(255,255,255,.7);
+  color:#fff;
+  font-family:Oswald;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:14px;
+  transition:all .2s ease;
+}
+.hero-btn:hover{
+  background:#fff;
+  color:#000;
+  transform:scale(1.05);
+}
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--headerPadX)}
+/* CONTACT */
+.section-black{
+  background:var(--black);
+  color:#fff;
+  padding:120px 0 80px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:120px;
+}
+h2.slash{
+  font-family:Oswald;
+  font-size:64px;
+  font-weight:400;
+  margin:0 0 40px;
+}
+.contact p{
+  margin:0 0 16px;
+  font-size:16px;
+}
+.contact a{color:#ccc}
 
-    header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--headerH);
-      background:#fff;
-      z-index:50;
-      border-bottom:none;
-    }
+/* FOOTER */
+footer{
+  padding:40px;
+  font-size:13px;
+  color:#777;
+  border-top:1px solid #eee;
+}
 
-    .header-inner{
-      height:var(--headerH);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      min-width:320px;
-      padding-right:10px;
-    }
-    .brand img{
-      height:56px;
-      width:auto;
-      display:block;
-    }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:56px;
-      font-family:var(--font);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-size:13px;
-      font-weight:500;
-    }
-
-    nav a{
-      color:var(--nav);
-      position:relative;
-      padding:10px 2px 14px;
-      transition:color .18s ease, transform .18s ease, opacity .18s ease;
-      opacity:.95;
-    }
-    nav a:hover{
-      color:#6f767f;
-      transform:translateY(-1px);
-    }
-
-    nav a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:6px;
-      height:2px;
-      background:var(--accent);
-      transform:scaleX(0);
-      transform-origin:center;
-      transition:transform .18s ease;
-      opacity:1;
-    }
-    nav a:hover::after{transform:scaleX(.65)}
-    nav a.active{
-      color:var(--accent);
-      opacity:1;
-    }
-    nav a.active::after{transform:scaleX(.65)}
-
-    main{padding-top:var(--headerH)}
-
-    /* HERO */
-    .hero{
-      position:relative;
-      height:calc(100vh - var(--headerH));
-      min-height:520px;
-      overflow:hidden;
-      background:#0b0b0b;
-    }
-
-    .hero-media{
-      position:absolute;
-      inset:0;
-      transform:translate3d(0,0,0) scale(1);
-      will-change:transform;
-    }
-    .hero-media::before{
-      content:"";
-      position:absolute;
-      inset:-18px;
-      background-image:url("https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1599845625533-7BA5RTRGQAHAZMLSER2F/BANNER.jpg");
-      background-size:cover;
-      background-position:center;
-      filter:saturate(1.06) contrast(1.03);
-      transform:scale(1.02);
-    }
-    .hero-media::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(1100px 520px at 50% 45%, rgba(0,0,0,.10), rgba(0,0,0,.30)),
-        linear-gradient(to bottom, rgba(0,0,0,.12), rgba(0,0,0,.22));
-    }
-
-    .hero-content{
-      position:relative;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:0 18px;
-    }
-
-    .hero h1{
-      margin:0 0 22px 0;
-      font-weight:600;
-      color:#fff;
-      font-size:64px;
-      line-height:1.06;
-      letter-spacing:.01em;
-      text-shadow:0 12px 28px rgba(0,0,0,.28);
-    }
-
-    .btn-outline{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      height:56px;
-      min-width:210px;
-      padding:0 34px;
-      border:2px solid rgba(255,255,255,.68);
-      color:#fff;
-      font-family:var(--font);
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-size:12px;
-      font-weight:600;
-      background:transparent;
-      box-shadow:0 14px 30px rgba(0,0,0,.16);
-      transition:
-        transform .16s ease,
-        background .16s ease,
-        border-color .16s ease,
-        color .16s ease,
-        box-shadow .16s ease;
-      user-select:none;
-      border-radius:2px;
-      backface-visibility:hidden;
-    }
-    .btn-outline:hover{
-      transform:translateY(-2px) scale(1.05);
-      background:#fff;
-      color:#111827;
-      border-color:#fff;
-      box-shadow:0 18px 40px rgba(0,0,0,.18);
-    }
-    .btn-outline:active{
-      transform:translateY(-1px) scale(1.02);
-    }
-
-    /* CONTACT SECTION (só aparece no scroll) */
-    .section-black{
-      background:var(--black);
-      color:#fff;
-      padding:92px 0 74px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:72px;
-      align-items:start;
-    }
-
-    .slash-title{
-      font-weight:600;
-      font-size:74px;
-      line-height:1;
-      letter-spacing:.01em;
-      margin:0 0 42px 0;
-      opacity:.95;
-    }
-
-    .contact-block{
-      margin-top:6px;
-      text-align:center;
-      max-width:360px;
-    }
-    .contact-label{
-      font-weight:600;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      font-size:16px;
-      margin:0 0 10px 0;
-      color:#fff;
-    }
-    .contact-email{
-      display:block;
-      font-size:18px;
-      color:rgba(255,255,255,.86);
-      margin:10px 0 0 0;
-      word-break:break-word;
-      transition:color .16s ease, transform .16s ease;
-    }
-    .contact-email:hover{
-      color:rgba(255,255,255,.98);
-      transform:translateY(-1px);
-    }
-
-    .addr h3{
-      margin:0 0 10px 0;
-      font-size:18px;
-      font-weight:600;
-      color:#fff;
-      text-align:center;
-    }
-    .addr p{
-      margin:0 0 30px 0;
-      color:rgba(255,255,255,.78);
-      line-height:1.8;
-      font-size:16px;
-      text-align:center;
-    }
-
-    footer{
-      background:#fff;
-      color:#5f6368;
-      text-align:center;
-      padding:24px 16px;
-      font-size:14px;
-    }
-    footer a{
-      color:#5f6368;
-      text-decoration:underline;
-      text-underline-offset:4px;
-    }
-
-    /* Responsivo */
-    @media (max-width: 980px){
-      :root{ --headerH:92px; --headerPadX:26px; }
-      nav{gap:40px}
-      .hero h1{font-size:54px}
-      .slash-title{font-size:64px}
-      .grid{gap:54px}
-    }
-
-    @media (max-width: 780px){
-      :root{ --headerH:86px; --headerPadX:18px; }
-      .brand{min-width:auto}
-      .brand img{height:48px}
-
-      nav{gap:18px; font-size:12px; letter-spacing:.16em}
-      .hero{min-height:520px}
-      .hero h1{font-size:44px}
-
-      .grid{grid-template-columns:1fr; gap:52px}
-      .contact-block{max-width:none}
-      .slash-title{font-size:58px; margin-bottom:26px; text-align:center}
-    }
-
-    @media (max-width: 520px){
-      nav{gap:14px}
-      .hero h1{font-size:38px}
-      .btn-outline{height:54px; min-width:200px; padding:0 26px}
-      .slash-title{font-size:52px}
-    }
-  </style>
+/* MOBILE */
+@media(max-width:900px){
+  .header-inner{height:96px}
+  .hero{margin-top:96px;height:calc(100vh - 96px)}
+  .hero h1{font-size:44px}
+  .grid{grid-template-columns:1fr;gap:80px}
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap header-inner">
-      <div class="brand" aria-label="R/Next">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w"
-          alt="R/Next logo"
-        >
-      </div>
 
-      <nav aria-label="Navegação principal">
-        <a class="active" href="/home">home</a>
-        <a href="/sobre">sobre</a>
-        <a href="/trabalhos">trabalhos</a>
-        <a href="/contato">contato</a>
-      </nav>
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w">
     </div>
-  </header>
+    <nav>
+      <a class="active" href="/">Home</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/trabalhos">Trabalhos</a>
+      <a href="/contato">Contato</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="hero" aria-label="Banner principal">
-      <div class="hero-media" id="heroMedia"></div>
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div>
+      <h1>R/Next. Marketing Hitmakers</h1>
+      <a href="/contato" class="hero-btn">Contact &gt;&gt;</a>
+    </div>
+  </div>
+</section>
 
-      <div class="hero-content">
-        <div>
-          <h1>R/Next. Marketing Hitmakers</h1>
-          <a class="btn-outline" href="/contato">contact &gt;&gt;</a>
-        </div>
+<section class="section-black">
+  <div class="wrap">
+    <div class="grid">
+      <div class="contact">
+        <h2 class="slash">/contato</h2>
+        <p>New Business</p>
+        <p><a href="mailto:newbusiness@rnext.com.br">newbusiness@rnext.com.br</a></p>
+        <br>
+        <p>Public Relations</p>
+        <p><a href="mailto:press@rnext.com.br">press@rnext.com.br</a></p>
       </div>
-    </section>
 
-    <section class="section-black" aria-label="Contato e Endereço">
-      <div class="wrap">
-        <div class="grid">
-          <div>
-            <h2 class="slash-title">/contato</h2>
-            <div class="contact-block">
-              <p class="contact-label">PR</p>
-              <a class="contact-email" href="mailto:imprensa@rnext.com.br">imprensa@rnext.com.br</a>
-            </div>
-          </div>
-
-          <div>
-            <h2 class="slash-title">/endereço</h2>
-
-            <div class="addr">
-              <h3>São Paulo</h3>
-              <p>
-                Rua Pais Leme, 215, Conj 1713, Pinheiros<br>
-                São Paulo, Brasil
-              </p>
-
-              <h3>Belo Horizonte</h3>
-              <p>
-                Rua Desembargador Jorge Fontana 112,<br>
-                Belvedere, Belo Horizonte, Brasil
-              </p>
-            </div>
-          </div>
-        </div>
+      <div>
+        <h2 class="slash">/endereço</h2>
+        <p><strong>São Paulo</strong><br>Rua Pais Leme, 215, Conj 1713<br>São Paulo, Brasil</p>
+        <br>
+        <p><strong>Belo Horizonte</strong><br>Rua Desembargador Jorge Fontana 112<br>Belvedere, Belo Horizonte, Brasil</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <footer>
-      © 2025 R/Next. Part of <a href="#" onclick="return false;">Ven3 Group</a>. All rights reserved.
-    </footer>
-  </main>
+<footer>
+  © 2025 R/Next. Part of Ven3 Group. All rights reserved.
+</footer>
 
-  <script>
-    (function () {
-      const hero = document.getElementById("heroMedia");
+<script>
+const bg=document.getElementById("heroBg");
+window.addEventListener("scroll",()=>{
+  const y=window.scrollY;
+  bg.style.transform=`scale(${1.05+y/2000})`;
+});
+</script>
 
-      function clamp(n, min, max) {
-        return Math.max(min, Math.min(max, n));
-      }
-
-      function update() {
-        const y = window.scrollY || 0;
-
-        // Parallax leve + zoom sutil conforme o scroll (a imagem "cresce" um pouco)
-        // Mantém suave e sem duplicar a imagem
-        const t = clamp(y / 900, 0, 1);
-        const translateY = y * 0.10;        // movimento sutil
-        const scale = 1 + (t * 0.06);       // cresce um pouco
-
-        hero.style.transform = "translate3d(0," + (-translateY) + "px,0) scale(" + scale + ")";
-      }
-
-      update();
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
-    })();
-  </script>
 </body>
 </html>
-```
