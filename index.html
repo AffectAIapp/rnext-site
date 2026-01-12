@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -24,7 +25,7 @@
 
       /* CABEÇALHO: mantém tamanho, logo 30% menor */
       --header-h:170px;
-      --logo-h:50px; /* 72px -> ~30% menor */
+      --logo-h:50px;
 
       --h1:64px;
       --h1-lh:1.06;
@@ -62,7 +63,6 @@
       gap:24px;
     }
 
-    /* respiro simétrico: header alto + logo menor + centralização vertical */
     .brand{
       display:flex;
       align-items:center;
@@ -95,8 +95,6 @@
     }
     nav a:hover{ color:var(--accent); }
     nav a.active{ color:var(--accent); }
-
-    /* se quiser manter underline só no ativo, fica aqui */
     nav a.active::after{
       content:"";
       position:absolute;
@@ -111,7 +109,6 @@
 
     main{padding-top:var(--header-h)}
 
-    /* HERO */
     .hero{
       position:relative;
       height:calc(100vh - var(--header-h));
@@ -121,23 +118,23 @@
       isolation:isolate;
     }
 
-    /* crop + revelação via clip-path (janela abrindo) */
+    /* AQUI é o ponto chave do original:
+       crop inicial APENAS embaixo e revela conforme scroll */
     .hero-media{
       position:absolute;
       inset:0;
 
-      /* maior que o container pra não aparecer linha ao mover */
       width:106%;
       height:106%;
       left:-3%;
       top:-3%;
 
       will-change:transform, clip-path;
-      transform:translate3d(0,0,0) scale(1.05);
+      transform:translate3d(0,0,0) scale(1.06);
       transform-origin:center;
 
-      /* estado inicial (crop) */
-      clip-path: inset(12% 0 18% 0);
+      /* estado inicial: topo sem corte, base cortada */
+      clip-path: inset(0 0 22% 0);
     }
 
     .hero-media img{
@@ -150,7 +147,6 @@
       transform:translateZ(0);
     }
 
-    /* overlay mais claro (50% menos opacidade do que você tinha) */
     .hero-overlay{
       position:absolute;
       inset:0;
@@ -209,7 +205,6 @@
       border-color:#fff;
     }
 
-    /* SEÇÃO PRETA */
     .section-black{
       background:var(--black);
       color:#fff;
@@ -415,41 +410,54 @@
       const media = document.getElementById("heroMedia");
       if (!media) return;
 
-      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const hero = media.closest(".hero");
+      if (!hero) return;
 
-      function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+      const prefersReduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      function update(){
+      function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+      let ticking = false;
+
+      function compute() {
+        ticking = false;
         if (prefersReduced) return;
 
-        const y = window.scrollY || 0;
+        const rect = hero.getBoundingClientRect();
 
-        const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 0;
-        const heroH = Math.max(1, window.innerHeight - headerH);
+        /* progresso enquanto o hero está na tela */
+        const heroScroll = clamp(-rect.top, 0, hero.offsetHeight);
+        const t = clamp(heroScroll / hero.offsetHeight, 0, 1);
 
-        /* progresso no hero */
-        const t = clamp(y / heroH, 0, 1);
+        /* parallax interno suave */
+        const translate = heroScroll * 0.12;
+        const scale = 1.06 + (t * 0.01);
 
-        /* imagem rola por dentro (parallax) */
-        const translate = y * 0.09;
-        const scale = 1.05 + (t * 0.012);
+        media.style.transform =
+          "translate3d(0," + (-translate).toFixed(2) + "px,0) scale(" + scale.toFixed(4) + ")";
 
-        media.style.transform = "translate3d(0," + (-translate) + "px,0) scale(" + scale.toFixed(4) + ")";
+        /* REVELAÇÃO do crop: só embaixo, topo sempre 0 */
+        const startBottom = 22;  /* % inicial cortado embaixo */
+        const endBottom = 0;     /* % final */
 
-        /* crop + revelação (abre a janela conforme scroll) */
-        const topStart = 12; /* % */
-        const botStart = 18; /* % */
+        const bottom = startBottom * (1 - t) + endBottom * t;
 
-        const top = (1 - t) * topStart;
-        const bot = (1 - t) * botStart;
-
-        media.style.clipPath = "inset(" + top.toFixed(2) + "% 0 " + bot.toFixed(2) + "% 0)";
+        media.style.clipPath = "inset(0 0 " + bottom.toFixed(2) + "% 0)";
       }
 
-      update();
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(compute);
+      }
+
+      compute();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
     })();
   </script>
 </body>
 </html>
+```
