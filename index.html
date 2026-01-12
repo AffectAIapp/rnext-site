@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -22,9 +23,9 @@
 
       --max:1200px;
 
-      /* CABEÇALHO: mais respiro acima e abaixo da logo */
+      /* CABEÇALHO: mantém tamanho, logo 30% menor */
       --header-h:170px;
-      --logo-h:72px;
+      --logo-h:50px; /* 72px -> ~30% menor */
 
       --h1:64px;
       --h1-lh:1.06;
@@ -51,8 +52,6 @@
       height:var(--header-h);
       background:#fff;
       z-index:50;
-
-      /* tira o risco do header (border) */
       border-bottom:none;
       box-shadow:0 1px 0 rgba(17,24,39,.08);
     }
@@ -64,13 +63,13 @@
       gap:24px;
     }
 
+    /* respiro simétrico: header alto + logo menor + centralização vertical */
     .brand{
       display:flex;
       align-items:center;
+      height:100%;
       gap:14px;
-
-      /* dobra o respiro vertical */
-      padding:34px 0;
+      padding:0;
       min-width:260px;
     }
     .brand img{
@@ -90,14 +89,15 @@
       font-weight:600;
     }
     nav a{
+      position:relative;
       color:var(--nav);
       transition:color .15s ease;
       padding:10px 0;
     }
     nav a:hover{ color:var(--accent); }
-
-    /* hover sem risco */
     nav a.active{ color:var(--accent); }
+
+    /* se quiser manter underline só no ativo, fica aqui */
     nav a.active::after{
       content:"";
       position:absolute;
@@ -109,37 +109,36 @@
       background:var(--accent);
       border-radius:2px;
     }
-    nav a{ position:relative; }
 
     main{padding-top:var(--header-h)}
 
     /* HERO */
     .hero{
       position:relative;
-
-      /* garante que sempre fecha na base da imagem, sem “faixa” */
       height:calc(100vh - var(--header-h));
       min-height:520px;
-
       overflow:hidden;
-      background:#050505; /* evita vazar branco no subpixel */
+      background:#050505;
       isolation:isolate;
     }
 
-    /* elemento real, nada de ::before com inset */
+    /* crop + revelação via clip-path (janela abrindo) */
     .hero-media{
       position:absolute;
       inset:0;
 
-      /* um pouco maior para nunca aparecer borda ao mover */
-      width:102%;
-      height:102%;
-      left:-1%;
-      top:-1%;
+      /* maior que o container pra não aparecer linha ao mover */
+      width:106%;
+      height:106%;
+      left:-3%;
+      top:-3%;
 
-      will-change:transform;
+      will-change:transform, clip-path;
       transform:translate3d(0,0,0) scale(1.05);
       transform-origin:center;
+
+      /* estado inicial (crop) */
+      clip-path: inset(12% 0 18% 0);
     }
 
     .hero-media img{
@@ -148,13 +147,11 @@
       object-fit:cover;
       object-position:center;
       display:block;
-
-      /* ajuda a evitar linha de 1px em alguns browsers */
       backface-visibility:hidden;
       transform:translateZ(0);
     }
 
-    /* overlay com 50% menos opacidade (mais claro) */
+    /* overlay mais claro (50% menos opacidade do que você tinha) */
     .hero-overlay{
       position:absolute;
       inset:0;
@@ -181,7 +178,7 @@
       margin:0 0 22px 0;
       font-family:var(--oswald);
       font-weight:500;
-      color:rgba(255,255,255,.98);
+      color:rgba(255,255,255,.99);
       font-size:var(--h1);
       line-height:var(--h1-lh);
       letter-spacing:.01em;
@@ -195,7 +192,7 @@
       height:54px;
       padding:0 34px;
       border:2px solid rgba(255,255,255,.78);
-      color:rgba(255,255,255,.98);
+      color:rgba(255,255,255,.99);
       font-family:var(--mont);
       letter-spacing:.22em;
       text-transform:uppercase;
@@ -218,8 +215,6 @@
       background:var(--black);
       color:#fff;
       padding:86px 0 72px;
-
-      /* remove “risco” de junção do hero com a seção */
       position:relative;
       z-index:5;
     }
@@ -231,7 +226,6 @@
     }
     .col{ text-align:center; }
 
-    /* título igual tamanho do hero, mas sem sombra e mais “limpo” */
     .section-title{
       margin:0 0 22px 0;
       font-family:var(--oswald);
@@ -249,7 +243,6 @@
       margin-right:auto;
     }
 
-    /* sem caixa alta */
     .contact-label{
       font-family:var(--mont);
       letter-spacing:.02em;
@@ -292,8 +285,6 @@
       text-align:center;
       padding:22px 14px;
       font-size:14px;
-
-      /* sem referência a ven3 */
       border-top:none;
       box-shadow:0 -1px 0 rgba(17,24,39,.08);
     }
@@ -301,18 +292,17 @@
     @media (max-width: 980px){
       :root{
         --header-h:150px;
-        --logo-h:64px;
+        --logo-h:45px;
         --h1:52px;
       }
       nav{gap:34px}
       .grid{gap:44px}
-      .brand{padding:30px 0}
     }
 
     @media (max-width: 780px){
       :root{
         --header-h:132px;
-        --logo-h:56px;
+        --logo-h:40px;
         --h1:44px;
       }
       .wrap{padding:0 18px}
@@ -325,18 +315,17 @@
         grid-template-columns:1fr;
         gap:52px;
       }
-      .brand{min-width:auto; padding:26px 0}
+      .brand{min-width:auto}
     }
 
     @media (max-width: 520px){
       :root{
         --header-h:120px;
-        --logo-h:52px;
+        --logo-h:38px;
         --h1:38px;
       }
       nav{gap:14px}
       .btn-outline{height:52px; padding:0 26px}
-      .brand{padding:22px 0}
     }
   </style>
 </head>
@@ -425,22 +414,37 @@
   <script>
     (function () {
       const media = document.getElementById("heroMedia");
+      if (!media) return;
+
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
       function update(){
+        if (prefersReduced) return;
+
         const y = window.scrollY || 0;
 
         const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 0;
         const heroH = Math.max(1, window.innerHeight - headerH);
 
+        /* progresso no hero */
         const t = clamp(y / heroH, 0, 1);
 
-        /* parallax leve: imagem “rola por dentro” como no original */
-        const translate = y * 0.08;   /* movimento */
-        const scale = 1.05 + (t * 0.015); /* zoom bem suave */
+        /* imagem rola por dentro (parallax) */
+        const translate = y * 0.09;
+        const scale = 1.05 + (t * 0.012);
 
         media.style.transform = "translate3d(0," + (-translate) + "px,0) scale(" + scale.toFixed(4) + ")";
+
+        /* crop + revelação (abre a janela conforme scroll) */
+        const topStart = 12; /* % */
+        const botStart = 18; /* % */
+
+        const top = (1 - t) * topStart;
+        const bot = (1 - t) * botStart;
+
+        media.style.clipPath = "inset(" + top.toFixed(2) + "% 0 " + bot.toFixed(2) + "% 0)";
       }
 
       update();
@@ -450,3 +454,4 @@
   </script>
 </body>
 </html>
+```
