@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R/Next | Sobre</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --headline:#2b2d3a;
+      --black:#0b0b0b;
+      --accent:#f5a623;
+      --nav:#9aa0a6;
+      --line:rgba(17,24,39,.10);
+      --muted:rgba(17,24,39,.78);
+      --sand:#f6b44b;
+
+      --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      --max:1200px;
+
+      --header-h:110px;
+      --logo-h:44px;
+
+      --drawer-w:320px;
+
+      --display:76px;
+      --display-lh:1.02;
+
+      --h2:64px;
+      --h2-lh:1.04;
+
+      --body:16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--mont);
+      color:var(--text);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--header-h);
+      background:#fff;
+      z-index:50;
+      border-bottom:none;
+      box-shadow:0 1px 0 rgba(17,24,39,.08);
+    }
+    .header-inner{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:18px 0;
+      min-width:220px;
+    }
+    .brand img{
+      height:var(--logo-h);
+      width:auto;
+      display:block;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:54px;
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:600;
+    }
+    nav a{
+      color:var(--nav);
+      transition:color .15s ease;
+      padding:10px 0;
+      position:relative;
+    }
+    nav a:hover{ color:var(--accent); }
+    nav a.active{ color:var(--accent); }
+    nav a.active::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:3px;
+      width:26px;
+      height:2px;
+      background:var(--accent);
+      border-radius:2px;
+    }
+
+    main{padding-top:var(--header-h)}
+
+    /* layout base das seções */
+    .section{
+      padding:72px 0;
+      background:#fff;
+    }
+    .section.tight{ padding:58px 0; }
+    .section.no-top{ padding-top:0; }
+    .section.no-bottom{ padding-bottom:0; }
+
+    .divider{
+      height:1px;
+      background:var(--line);
+      width:100%;
+    }
+
+    .kicker{
+      width:96px;
+      height:5px;
+      background:var(--accent);
+      border-radius:6px;
+      margin:0 auto 26px;
+    }
+
+    /* ABOUT HERO */
+    .about-hero{
+      padding:46px 0 46px;
+    }
+    .about-hero .headline{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:700;
+      color:var(--headline);
+      font-size:var(--display);
+      line-height:var(--display-lh);
+      text-align:center;
+      letter-spacing:-.01em;
+    }
+
+    .content-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:0;
+      max-width:760px;
+      margin:0 auto;
+      padding:52px 0 0;
+    }
+
+    .lead{
+      margin:0 0 18px 0;
+      font-size:var(--body);
+      line-height:1.85;
+      color:rgba(17,24,39,.86);
+    }
+    .lead strong{ font-weight:700; color:rgba(17,24,39,.92); }
+
+    .p{
+      margin:0 0 18px 0;
+      font-size:var(--body);
+      line-height:1.9;
+      color:rgba(17,24,39,.80);
+    }
+
+    /* STATS (laranja) */
+    .band{
+      background:var(--sand);
+      padding:92px 0;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:46px;
+      align-items:start;
+      max-width:1040px;
+      margin:0 auto;
+      text-align:center;
+    }
+    .stat-num{
+      font-family:var(--oswald);
+      font-weight:700;
+      font-size:74px;
+      line-height:1.02;
+      letter-spacing:-.01em;
+      color:#0b0b0b;
+      margin:0;
+    }
+    .stat-label{
+      font-family:var(--oswald);
+      font-weight:700;
+      font-size:64px;
+      line-height:1.02;
+      letter-spacing:-.01em;
+      color:#0b0b0b;
+      margin:10px 0 22px;
+    }
+    .stat-foot{
+      margin:0;
+      font-size:14px;
+      line-height:1.85;
+      color:rgba(0,0,0,.78);
+      max-width:300px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .stat-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
+
+    /* TITULOS internas */
+    .title{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:700;
+      color:var(--headline);
+      font-size:var(--h2);
+      line-height:var(--h2-lh);
+      text-align:center;
+      letter-spacing:-.01em;
+    }
+
+    .text-block{
+      max-width:760px;
+      margin:0 auto;
+      padding-top:44px;
+    }
+
+    /* AWARDS (laranja com ícones) */
+    .awards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:46px;
+      align-items:start;
+      max-width:1040px;
+      margin:0 auto;
+      text-align:center;
+    }
+    .badge{
+      width:110px;
+      height:110px;
+      margin:0 auto 18px;
+      opacity:.95;
+    }
+    .award-title{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:700;
+      font-size:64px;
+      line-height:1.02;
+      letter-spacing:-.01em;
+      color:#0b0b0b;
+    }
+    .award-foot{
+      margin:22px auto 0;
+      font-size:14px;
+      line-height:1.9;
+      color:rgba(0,0,0,.80);
+      max-width:320px;
+    }
+    .award-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
+
+    /* CONTATO (preto) */
+    .section-black{
+      background:var(--black);
+      color:#fff;
+      padding:86px 0 72px;
+    }
+    .grid-black{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:64px;
+      align-items:start;
+      text-align:center;
+    }
+    .section-black .big{
+      margin:0 0 26px 0;
+      font-family:var(--oswald);
+      font-weight:700;
+      font-size:60px;
+      line-height:1.02;
+      color:#fff;
+    }
+    .contact-block{
+      margin-top:18px;
+      max-width:520px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .contact-label{
+      font-family:var(--mont);
+      letter-spacing:.02em;
+      font-size:16px;
+      font-weight:600;
+      margin:0 0 10px 0;
+      color:#fff;
+    }
+    .contact-email{
+      display:block;
+      font-size:18px;
+      color:rgba(255,255,255,.86);
+      margin:8px 0 0 0;
+      word-break:break-word;
+    }
+    .addr{
+      max-width:560px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .addr h3{
+      margin:18px 0 10px 0;
+      font-size:18px;
+      font-weight:700;
+      color:#fff;
+    }
+    .addr p{
+      margin:0 0 26px 0;
+      color:rgba(255,255,255,.78);
+      line-height:1.9;
+      font-size:16px;
+    }
+
+    footer{
+      background:#fff;
+      color:#5f6368;
+      text-align:center;
+      padding:22px 14px;
+      font-size:14px;
+      border-top:none;
+      box-shadow:0 -1px 0 rgba(17,24,39,.08);
+    }
+
+    /* HAMBURGER (mobile) */
+    .menu-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:46px;
+      height:46px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      border-radius:10px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .burger{
+      width:22px;
+      height:16px;
+      position:relative;
+    }
+    .burger span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:var(--nav);
+      border-radius:2px;
+      transition:transform .22s ease, top .22s ease, opacity .18s ease, background .15s ease;
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:7px; }
+    .burger span:nth-child(3){ top:14px; }
+
+    body.menu-open .burger span{ background:var(--accent); }
+    body.menu-open .burger span:nth-child(1){ top:7px; transform:rotate(45deg); }
+    body.menu-open .burger span:nth-child(2){ opacity:0; }
+    body.menu-open .burger span:nth-child(3){ top:7px; transform:rotate(-45deg); }
+
+    .drawer-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease;
+      z-index:60;
+    }
+    .drawer{
+      position:fixed;
+      top:0;
+      right:0;
+      height:100%;
+      width:min(var(--drawer-w), 86vw);
+      background:#fff;
+      box-shadow:-20px 0 60px rgba(0,0,0,.18);
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.2,.85,.2,1);
+      z-index:70;
+      padding:22px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .drawer .drawer-top{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6px;
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:10px 6px 22px;
+    }
+    .drawer-nav a{
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      font-weight:700;
+      color:var(--nav);
+      padding:14px 10px;
+      border-radius:12px;
+      transition:background .15s ease, color .15s ease;
+    }
+    .drawer-nav a:hover{
+      background:rgba(245,166,35,.12);
+      color:var(--accent);
+    }
+    .drawer-nav a.active{
+      color:var(--accent);
+      background:rgba(245,166,35,.12);
+    }
+
+    body.menu-open .drawer-overlay{
+      opacity:1;
+      pointer-events:auto;
+    }
+    body.menu-open .drawer{
+      transform:translateX(0);
+    }
+    body.menu-open{
+      overflow:hidden;
+      touch-action:none;
+    }
+
+    @media (max-width: 980px){
+      :root{
+        --header-h:104px;
+        --logo-h:40px;
+
+        --display:62px;
+        --h2:54px;
+      }
+      nav{gap:34px}
+      .brand{padding:16px 0}
+      .stats,.awards{ gap:34px; }
+      .stat-num{ font-size:62px; }
+      .stat-label{ font-size:54px; }
+      .award-title{ font-size:54px; }
+      .section-black .big{ font-size:54px; }
+    }
+
+    @media (max-width: 780px){
+      :root{
+        --header-h:92px;
+        --logo-h:36px;
+        --drawer-w:340px;
+
+        --display:54px;
+        --h2:48px;
+      }
+      .wrap{padding:0 18px}
+      nav{ display:none; }
+      .menu-btn{ display:inline-flex; }
+      .brand{min-width:auto; padding:14px 0}
+
+      .stats,.awards{
+        grid-template-columns:1fr;
+        gap:42px;
+      }
+
+      .grid-black{
+        grid-template-columns:1fr;
+        gap:52px;
+      }
+
+      .stat-num{ font-size:56px; }
+      .stat-label{ font-size:54px; }
+      .award-title{ font-size:54px; }
+      .section-black .big{ font-size:52px; }
+    }
+
+    @media (max-width: 520px){
+      :root{
+        --header-h:86px;
+        --logo-h:34px;
+        --drawer-w:320px;
+
+        --display:46px;
+        --h2:42px;
+        --body:15px;
+      }
+      .brand{padding:12px 0}
+      .section{ padding:64px 0; }
+      .about-hero{ padding:38px 0 38px; }
+      .content-grid{ padding-top:42px; }
+      .band{ padding:78px 0; }
+      .badge{ width:96px; height:96px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <div class="brand" aria-label="R/Next">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w"
+          alt="R/Next logo"
+        >
+      </div>
+
+      <nav aria-label="Navegação principal">
+        <a href="/">home</a>
+        <a class="active" href="/sobre">sobre</a>
+        <a href="/trabalhos">trabalhos</a>
+        <a href="/contato">contato</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu mobile" aria-hidden="true">
+    <div class="drawer-top">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=300w"
+          alt="R/Next"
+          style="height:28px; width:auto; display:block;"
+        >
+      </div>
+
+      <button class="menu-btn" id="menuClose" aria-label="Fechar menu">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navegação mobile">
+      <a href="/">home</a>
+      <a class="active" href="/sobre">sobre</a>
+      <a href="/trabalhos">trabalhos</a>
+      <a href="/contato">contato</a>
+    </nav>
+  </aside>
+
+  <main>
+    <!-- topo, linha, headline -->
+    <section class="section about-hero tight">
+      <div class="wrap">
+        <div class="divider"></div>
+
+        <div style="padding:66px 0 44px;">
+          <h1 class="headline">Digital de alta performance, impulsionado pelo DNA por trás de hits de marketing</h1>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="content-grid">
+          <p class="lead">
+            <strong>A R/Next é especializada em criar projetos digitais e campanhas de alta performance que viram hits.</strong>
+            Eles ganham escala na internet, na mídia, nas redes sociais e, principalmente, em vendas.
+          </p>
+
+          <p class="p">
+            Existimos para acelerar o crescimento de capital e o valor de marca de empresas, instituições e figuras públicas.
+          </p>
+
+          <p class="p" style="margin-bottom:0;">
+            Ajudamos nossos clientes a se tornarem marcas desejadas, ocupando um lugar central nas escolhas do público com experiências, ideias,
+            produtos e inovações que melhoram e influenciam diretamente a vida das pessoas.
+          </p>
+
+          <div style="padding-top:52px;">
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- faixa laranja: números -->
+    <section class="band" aria-label="Números e alcance">
+      <div class="wrap">
+        <div class="stats">
+          <div>
+            <p class="stat-num">+120</p>
+            <p class="stat-label">Países</p>
+            <p class="stat-foot">Alcançados com a campanha <strong>“Let’s Change the Numbers”</strong></p>
+          </div>
+
+          <div>
+            <p class="stat-num">+78M</p>
+            <p class="stat-label">Seguidores</p>
+            <p class="stat-foot">Alcance orgânico com a campanha <strong>“Repeated Post”</strong> para <strong>ABRAz</strong></p>
+          </div>
+
+          <div>
+            <p class="stat-num">+US$</p>
+            <p class="stat-label">9M em Mídia</p>
+            <p class="stat-foot">Mídia espontânea gerada pelo projeto <strong>“Let’s Change the Numbers”</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- leadership -->
+    <section class="section" aria-label="Liderança">
+      <div class="wrap">
+        <div class="kicker"></div>
+        <h2 class="title">Conheça nossa liderança</h2>
+
+        <div class="text-block">
+          <p class="lead">
+            <strong>A R/Next Brasil é liderada por Rodrigo Carvalho, CEO e cofundador.</strong>
+            Ele criou grandes hits para agências regionais e nacionais, e também para projetos autorais da R/Next.
+          </p>
+
+          <p class="p">
+            Rodrigo criou a campanha <strong>#LetsChangeTheNumbers</strong>, um projeto vencedor de <strong>Cannes Lions</strong>,
+            com repercussão em veículos como <strong>The Guardian</strong>, <strong>The Washington Post</strong>, <strong>The New York Times</strong>
+            e muitos outros. A campanha alcançou mais de <strong>100 milhões de pessoas</strong>.
+          </p>
+
+          <div style="padding-top:34px;">
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- young lions -->
+    <section class="section no-top" aria-label="Young Lions">
+      <div class="wrap">
+        <h2 class="title" style="text-align:left; max-width:760px; margin:0 auto;">Young Lions</h2>
+
+        <div class="text-block" style="padding-top:26px;">
+          <p class="p" style="margin-bottom:0;">
+            Em 2018, Rodrigo Carvalho foi um dos representantes no <strong>Young Lions</strong>, programa global do Cannes Lions
+            que seleciona os melhores profissionais de marketing e publicidade do mundo com menos de 30 anos.
+          </p>
+
+          <div style="padding-top:42px;">
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- faixa laranja: awards -->
+    <section class="band" aria-label="Reconhecimentos">
+      <div class="wrap">
+        <div class="awards">
+          <div>
+            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M60 18c18 0 32 14 32 32 0 10-4 19-11 25-5 4-8 10-9 18H48c-1-8-4-14-9-18-7-6-11-15-11-25 0-18 14-32 32-32Z"
+                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M44 96c10 6 22 6 32 0" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M52 36c6-6 16-6 22 0" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+
+            <p class="award-title">Cannes<br>Lions</p>
+            <p class="award-foot">
+              Campanha vencedora de <strong>Cannes Lions</strong> com alcance de mais de <strong>100 milhões</strong> via <strong>earned media</strong>.
+            </p>
+          </div>
+
+          <div>
+            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M32 30h56v16H32z" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M38 46v44c0 8 6 14 14 14h16c8 0 14-6 14-14V46"
+                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M34 30l6-10h40l6 10" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M50 62h20" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+
+            <p class="award-title">Mais<br>premiado</p>
+            <p class="award-foot">
+              A campanha mais premiada da história de Minas Gerais, um dos principais estados do Brasil.
+            </p>
+          </div>
+
+          <div>
+            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M24 70c10-18 24-26 36-26 12 0 22 6 30 18"
+                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M32 72c6 10 14 16 22 16 8 0 16-6 22-16"
+                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M48 44c-4-10 2-18 12-18s16 8 12 18"
+                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+
+            <p class="award-title">Young<br>Lions</p>
+            <p class="award-foot">
+              Selecionado entre os <strong>melhores profissionais</strong> do mundo com menos de 30 anos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contato e escritórios -->
+    <section class="section-black" aria-label="Contato e escritórios">
+      <div class="wrap">
+        <div class="grid-black">
+          <div>
+            <h2 class="big">/fale com a gente</h2>
+
+            <div class="contact-block">
+              <p class="contact-label">New Business</p>
+              <a class="contact-email" href="mailto:newbusiness@rnext.agency">newbusiness@rnext.agency</a>
+
+              <div style="height:26px;"></div>
+
+              <p class="contact-label">Carreiras</p>
+              <a class="contact-email" href="mailto:careers@rnext.agency">careers@rnext.agency</a>
+
+              <div style="height:26px;"></div>
+
+              <p class="contact-label">Public Relations</p>
+              <a class="contact-email" href="mailto:press@rnext.agency">press@rnext.agency</a>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="big">/escritórios</h2>
+
+            <div class="addr">
+              <h3>Europa</h3>
+              <p>
+                3rd Floor, 86-90 Paul Street,<br>
+                London, EC2A 4NE, United Kingdom
+              </p>
+
+              <h3>Latam</h3>
+              <p style="margin-bottom:0;">
+                Rua Pais Leme, 215, Conj 1713, Pinheiros<br>
+                São Paulo, Brasil
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 R/Next. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("menuClose");
+      const overlay = document.getElementById("drawerOverlay");
+      const drawer = document.getElementById("drawer");
+
+      function openMenu(){
+        document.body.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+        overlay.setAttribute("aria-hidden", "false");
+        drawer.setAttribute("aria-hidden", "false");
+      }
+
+      function closeMenu(){
+        document.body.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+        overlay.setAttribute("aria-hidden", "true");
+        drawer.setAttribute("aria-hidden", "true");
+      }
+
+      btn.addEventListener("click", openMenu);
+      closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+
+      document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeMenu();
+      });
+
+      drawer.addEventListener("click", function(e){
+        const a = e.target && e.target.closest && e.target.closest("a");
+        if(a) closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>
