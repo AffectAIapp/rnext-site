@@ -1,45 +1,35 @@
-```html
 <!doctype html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>R/Next | Sobre</title>
+  <title>R/Next</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#ffffff;
       --text:#111827;
-      --headline:#2b2d3a;
       --black:#0b0b0b;
       --accent:#f5a623;
       --nav:#9aa0a6;
-      --line:rgba(17,24,39,.10);
-      --muted:rgba(17,24,39,.78);
-      --sand:#f6b44b;
 
       --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
       --max:1200px;
 
+      /* HEADER no tamanho do print */
       --header-h:110px;
       --logo-h:44px;
 
+      --h1:64px;
+      --h1-lh:1.06;
+
       --drawer-w:320px;
-
-      --display:76px;
-      --display-lh:1.02;
-
-      --h2:64px;
-      --h2-lh:1.04;
-
-      /* texto +1px */
-      --body:17px;
     }
 
     *{box-sizing:border-box}
@@ -104,6 +94,7 @@
       position:relative;
     }
     nav a:hover{ color:var(--accent); }
+
     nav a.active{ color:var(--accent); }
     nav a.active::after{
       content:"";
@@ -119,184 +110,32 @@
 
     main{padding-top:var(--header-h)}
 
-    /* base */
-    .section{
-      padding:72px 0;
-      background:#fff;
-    }
-    .section.tight{ padding:58px 0; }
-    .section.no-top{ padding-top:0; }
-    .section.no-bottom{ padding-bottom:0; }
-
-    .divider{
-      height:1px;
-      background:var(--line);
-      width:100%;
-    }
-
-    .kicker{
-      width:96px;
-      height:5px;
-      background:var(--accent);
-      border-radius:6px;
-      margin:0 auto 26px;
-    }
-
-    /* topo */
-    .about-hero{
-      padding:46px 0 46px;
-    }
-    .about-hero .headline{
-      margin:0;
-      font-family:var(--oswald);
-      font-weight:600; /* menos bold */
-      color:var(--headline);
-      font-size:var(--display);
-      line-height:var(--display-lh);
-      text-align:center;
-      letter-spacing:-.01em;
-    }
-
-    .content-grid{
-      max-width:760px;
-      margin:0 auto;
-      padding:52px 0 0;
-    }
-
-    .lead{
-      margin:0 0 18px 0;
-      font-size:var(--body);
-      line-height:1.85;
-      color:rgba(17,24,39,.86);
-    }
-    .lead strong{ font-weight:700; color:rgba(17,24,39,.92); }
-
-    .p{
-      margin:0 0 18px 0;
-      font-size:var(--body);
-      line-height:1.9;
-      color:rgba(17,24,39,.80);
-    }
-
-    /* faixa laranja */
-    .band{
-      background:var(--sand);
-      padding:92px 0;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:46px;
-      align-items:start;
-      max-width:1040px;
-      margin:0 auto;
-      text-align:center;
-    }
-    .stat-num{
-      font-family:var(--oswald);
-      font-weight:700;
-      font-size:74px;
-      line-height:1.02;
-      letter-spacing:-.01em;
-      color:#0b0b0b;
-      margin:0;
-    }
-    .stat-label{
-      font-family:var(--oswald);
-      font-weight:700;
-      font-size:64px;
-      line-height:1.02;
-      letter-spacing:-.01em;
-      color:#0b0b0b;
-      margin:10px 0 22px;
-    }
-    .stat-foot{
-      margin:0;
-      font-size:14px;
-      line-height:1.85;
-      color:rgba(0,0,0,.78);
-      max-width:300px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .stat-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
-
-    .title{
-      margin:0;
-      font-family:var(--oswald);
-      font-weight:600; /* menos bold */
-      color:var(--headline);
-      font-size:var(--h2);
-      line-height:var(--h2-lh);
-      text-align:center;
-      letter-spacing:-.01em;
-    }
-
-    .text-block{
-      max-width:760px;
-      margin:0 auto;
-      padding-top:44px;
-    }
-
-    /* prêmios com imagens */
-    .awards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:46px;
-      align-items:start;
-      max-width:1040px;
-      margin:0 auto;
-      text-align:center;
-    }
-    .badge{
-      width:118px;
-      height:auto;
-      margin:0 auto 18px;
-      display:block;
-      opacity:.98;
-    }
-    .awards .badge{ max-height:92px; }
-
-    .award-title{
-      margin:0;
-      font-family:var(--oswald);
-      font-weight:700;
-      font-size:64px;
-      line-height:1.02;
-      letter-spacing:-.01em;
-      color:#0b0b0b;
-    }
-    .award-foot{
-      margin:22px auto 0;
-      font-size:14px;
-      line-height:1.9;
-      color:rgba(0,0,0,.80);
-      max-width:320px;
-    }
-    .award-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
-
-    /* seção preta */
+    /* SEÇÃO PRETA (igual index) */
     .section-black{
       background:var(--black);
       color:#fff;
       padding:86px 0 72px;
+      position:relative;
+      z-index:5;
     }
-    .grid-black{
+    .grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:64px;
       align-items:start;
-      text-align:center;
     }
-    .section-black .big{
-      margin:0 0 26px 0;
+    .col{ text-align:center; }
+
+    .section-title{
+      margin:0 0 22px 0;
       font-family:var(--oswald);
-      font-weight:600; /* menos bold */
-      font-size:60px;
-      line-height:1.02;
+      font-weight:500;
       color:#fff;
+      font-size:var(--h1);
+      line-height:var(--h1-lh);
+      letter-spacing:.01em;
     }
+
     .contact-block{
       margin-top:18px;
       max-width:520px;
@@ -310,6 +149,7 @@
       font-weight:600;
       margin:0 0 10px 0;
       color:#fff;
+      text-transform:none;
     }
     .contact-email{
       display:block;
@@ -318,25 +158,26 @@
       margin:8px 0 0 0;
       word-break:break-word;
     }
+
     .addr{
-      max-width:560px;
+      max-width:520px;
       margin-left:auto;
       margin-right:auto;
     }
     .addr h3{
       margin:18px 0 10px 0;
       font-size:18px;
-      font-weight:700;
+      font-weight:600;
       color:#fff;
     }
+    .addr h3:first-child{ margin-top:20px; }
     .addr p{
       margin:0 0 26px 0;
       color:rgba(255,255,255,.78);
-      line-height:1.9;
+      line-height:1.8;
       font-size:16px;
     }
 
-    /* rodapé igual ao index aprovado */
     footer{
       background:#fff;
       color:#5f6368;
@@ -347,7 +188,7 @@
       box-shadow:0 -1px 0 rgba(17,24,39,.08);
     }
 
-    /* HAMBURGER */
+    /* HAMBURGER (igual index) */
     .menu-btn{
       display:none;
       align-items:center;
@@ -358,6 +199,7 @@
       background:transparent;
       cursor:pointer;
       border-radius:10px;
+      transition:background .15s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -458,66 +300,213 @@
       :root{
         --header-h:104px;
         --logo-h:40px;
-
-        --display:62px;
-        --h2:54px;
+        --h1:52px;
       }
       nav{gap:34px}
+      .grid{gap:44px}
       .brand{padding:16px 0}
-      .stats,.awards{ gap:34px; }
-      .stat-num{ font-size:62px; }
-      .stat-label{ font-size:54px; }
-      .award-title{ font-size:54px; }
-      .section-black .big{ font-size:54px; }
     }
 
     @media (max-width: 780px){
       :root{
         --header-h:92px;
         --logo-h:36px;
+        --h1:44px;
         --drawer-w:340px;
-
-        --display:54px;
-        --h2:48px;
       }
       .wrap{padding:0 18px}
       nav{ display:none; }
       .menu-btn{ display:inline-flex; }
       .brand{min-width:auto; padding:14px 0}
-
-      .stats,.awards{
-        grid-template-columns:1fr;
-        gap:42px;
-      }
-
-      .grid-black{
+      .grid{
         grid-template-columns:1fr;
         gap:52px;
       }
-
-      .stat-num{ font-size:56px; }
-      .stat-label{ font-size:54px; }
-      .award-title{ font-size:54px; }
-      .section-black .big{ font-size:52px; }
     }
 
     @media (max-width: 520px){
       :root{
         --header-h:86px;
         --logo-h:34px;
+        --h1:38px;
         --drawer-w:320px;
-
-        --display:46px;
-        --h2:42px;
-        --body:16px;
       }
       .brand{padding:12px 0}
-      .section{ padding:64px 0; }
-      .about-hero{ padding:38px 0 38px; }
-      .content-grid{ padding-top:42px; }
+    }
+
+    /* =========================
+       /sobre (conteúdo)
+       Mantém tipografia do index
+       ========================= */
+
+    .page{
+      padding:0 0 0;
+      background:#fff;
+    }
+    .divider{
+      height:1px;
+      background:rgba(17,24,39,.10);
+      width:100%;
+    }
+
+    .sobre-hero{
+      padding:0;
+    }
+    .sobre-hero .topline{
+      padding:54px 0 38px;
+    }
+    .sobre-hero h1{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:500;
+      font-size:var(--h1);
+      line-height:var(--h1-lh);
+      letter-spacing:.01em;
+      text-align:center;
+      color:#2b2d3a;
+    }
+
+    .text-wrap{
+      max-width:760px;
+      margin:0 auto;
+      padding:46px 0 0;
+    }
+    .p{
+      margin:0 0 18px 0;
+      font-size:16px;
+      line-height:1.9;
+      color:rgba(17,24,39,.80);
+    }
+    .p strong{ font-weight:600; color:rgba(17,24,39,.92); }
+
+    .kicker{
+      width:96px;
+      height:5px;
+      background:var(--accent);
+      border-radius:6px;
+      margin:0 auto 26px;
+    }
+
+    .band{
+      background:#f6b44b;
+      padding:92px 0;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:46px;
+      align-items:start;
+      max-width:1040px;
+      margin:0 auto;
+      text-align:center;
+    }
+    .stat-num{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:600;
+      font-size:78px;
+      line-height:1.02;
+      letter-spacing:.01em;
+      color:#0b0b0b;
+    }
+    .stat-title{
+      margin:6px 0 18px;
+      font-family:var(--oswald);
+      font-weight:600;
+      font-size:64px;
+      line-height:1.02;
+      letter-spacing:.01em;
+      color:#0b0b0b;
+    }
+    .stat-foot{
+      margin:0 auto;
+      max-width:320px;
+      font-size:14px;
+      line-height:1.9;
+      color:rgba(0,0,0,.78);
+    }
+    .stat-foot strong{ font-weight:600; color:rgba(0,0,0,.86); }
+
+    .section{
+      padding:72px 0;
+      background:#fff;
+    }
+    .section .title{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:500;
+      font-size:var(--h1);
+      line-height:var(--h1-lh);
+      letter-spacing:.01em;
+      text-align:center;
+      color:#2b2d3a;
+    }
+
+    .section .body{
+      max-width:760px;
+      margin:0 auto;
+      padding-top:40px;
+    }
+
+    .subhead{
+      max-width:760px;
+      margin:0 auto;
+      font-family:var(--oswald);
+      font-weight:500;
+      font-size:var(--h1);
+      line-height:var(--h1-lh);
+      letter-spacing:.01em;
+      color:#2b2d3a;
+      text-align:left;
+    }
+
+    .awards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:46px;
+      align-items:start;
+      max-width:1040px;
+      margin:0 auto;
+      text-align:center;
+    }
+    .badge{
+      width:118px;
+      height:auto;
+      display:block;
+      margin:0 auto 16px;
+    }
+    .award-title{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:600;
+      font-size:64px;
+      line-height:1.02;
+      letter-spacing:.01em;
+      color:#0b0b0b;
+    }
+    .award-foot{
+      margin:18px auto 0;
+      max-width:340px;
+      font-size:14px;
+      line-height:1.9;
+      color:rgba(0,0,0,.80);
+    }
+    .award-foot strong{ font-weight:600; color:rgba(0,0,0,.86); }
+
+    @media (max-width: 980px){
+      .stats,.awards{ gap:34px; }
+      .stat-num{ font-size:66px; }
+      .stat-title{ font-size:54px; }
+      .award-title{ font-size:54px; }
+    }
+
+    @media (max-width: 780px){
+      .stats,.awards{
+        grid-template-columns:1fr;
+        gap:42px;
+      }
       .band{ padding:78px 0; }
-      .badge{ width:112px; }
-      .awards .badge{ max-height:88px; }
+      .sobre-hero .topline{ padding:46px 0 34px; }
     }
   </style>
 </head>
@@ -573,19 +562,19 @@
     </nav>
   </aside>
 
-  <main>
-    <section class="section about-hero tight">
+  <main class="page">
+    <section class="sobre-hero" aria-label="Sobre">
       <div class="wrap">
         <div class="divider"></div>
 
-        <div style="padding:66px 0 44px;">
-          <h1 class="headline">Digital de alta performance, impulsionado pelo DNA por trás de hits de marketing</h1>
+        <div class="topline">
+          <h1>Digital de alta performance, impulsionado pelo DNA por trás de hits de marketing</h1>
         </div>
 
         <div class="divider"></div>
 
-        <div class="content-grid">
-          <p class="lead">
+        <div class="text-wrap">
+          <p class="p">
             <strong>A R/Next é especializada em criar projetos digitais e campanhas de alta performance que viram hits.</strong>
             Eles ganham escala na internet, na mídia, nas redes sociais e, principalmente, em vendas.
           </p>
@@ -599,7 +588,7 @@
             produtos e inovações que melhoram e influenciam diretamente a vida das pessoas.
           </p>
 
-          <div style="padding-top:52px;">
+          <div style="padding-top:46px;">
             <div class="divider"></div>
           </div>
         </div>
@@ -611,20 +600,20 @@
         <div class="stats">
           <div>
             <p class="stat-num">+120</p>
-            <p class="stat-label">Países</p>
-            <p class="stat-foot">Alcançados com a campanha <strong>“Let’s Change the Numbers”</strong></p>
+            <p class="stat-title">Countries</p>
+            <p class="stat-foot">Reached with the campaign <strong>“Let’s Change the Numbers”</strong></p>
           </div>
 
           <div>
             <p class="stat-num">+78M</p>
-            <p class="stat-label">Seguidores</p>
-            <p class="stat-foot">Alcance orgânico com a campanha <strong>“Repeated Post”</strong> para <strong>ABRAz</strong></p>
+            <p class="stat-title">Followers</p>
+            <p class="stat-foot">Organically reached with the campaign <strong>“Repeated Post”</strong> for <strong>ABRAz</strong></p>
           </div>
 
           <div>
             <p class="stat-num">+US$</p>
-            <p class="stat-label">9M em Mídia</p>
-            <p class="stat-foot">Mídia espontânea gerada pelo projeto <strong>“Let’s Change the Numbers”</strong></p>
+            <p class="stat-title">9M in Media</p>
+            <p class="stat-foot">Earned with the project <strong>“Let’s Change the Numbers”</strong></p>
           </div>
         </div>
       </div>
@@ -635,36 +624,36 @@
         <div class="kicker"></div>
         <h2 class="title">Conheça nossa liderança</h2>
 
-        <div class="text-block">
-          <p class="lead">
+        <div class="body">
+          <p class="p">
             <strong>A R/Next Brasil é liderada por Rodrigo Carvalho, CEO e cofundador.</strong>
             Ele criou grandes hits para agências regionais e nacionais, e também para projetos autorais da R/Next.
           </p>
 
-          <p class="p">
+          <p class="p" style="margin-bottom:0;">
             Rodrigo criou a campanha <strong>#LetsChangeTheNumbers</strong>, um projeto vencedor de <strong>Cannes Lions</strong>,
             com repercussão em veículos como <strong>The Guardian</strong>, <strong>The Washington Post</strong>, <strong>The New York Times</strong>
             e muitos outros. A campanha alcançou mais de <strong>100 milhões de pessoas</strong>.
           </p>
 
-          <div style="padding-top:34px;">
+          <div style="padding-top:44px;">
             <div class="divider"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section no-top" aria-label="Young Lions">
+    <section class="section" aria-label="Young Lions" style="padding-top:0;">
       <div class="wrap">
-        <h2 class="title" style="text-align:left; max-width:760px; margin:0 auto;">Young Lions</h2>
+        <h2 class="subhead">Young Lions</h2>
 
-        <div class="text-block" style="padding-top:26px;">
+        <div class="body" style="padding-top:26px;">
           <p class="p" style="margin-bottom:0;">
             Em 2018, Rodrigo Carvalho foi um dos representantes no <strong>Young Lions</strong>, programa global do Cannes Lions
             que seleciona os melhores profissionais de marketing e publicidade do mundo com menos de 30 anos.
           </p>
 
-          <div style="padding-top:42px;">
+          <div style="padding-top:44px;">
             <div class="divider"></div>
           </div>
         </div>
@@ -682,7 +671,6 @@
               loading="lazy"
               decoding="async"
             >
-
             <p class="award-title">Cannes<br>Lions</p>
             <p class="award-foot">
               Campanha vencedora de <strong>Cannes Lions</strong> com alcance de mais de <strong>100 milhões</strong> via <strong>earned media</strong>.
@@ -697,8 +685,7 @@
               loading="lazy"
               decoding="async"
             >
-
-            <p class="award-title">Mais<br>premiado</p>
+            <p class="award-title">Most-<br>Awarded</p>
             <p class="award-foot">
               A campanha mais premiada da história de Minas Gerais, um dos principais estados do Brasil.
             </p>
@@ -712,7 +699,6 @@
               loading="lazy"
               decoding="async"
             >
-
             <p class="award-title">Young<br>Lions</p>
             <p class="award-foot">
               Selecionado entre os <strong>melhores profissionais</strong> do mundo com menos de 30 anos.
@@ -724,9 +710,9 @@
 
     <section class="section-black" aria-label="Contato e escritórios">
       <div class="wrap">
-        <div class="grid-black">
-          <div>
-            <h2 class="big">/fale com a gente</h2>
+        <div class="grid">
+          <div class="col">
+            <h2 class="section-title">/contact us</h2>
 
             <div class="contact-block">
               <p class="contact-label">New Business</p>
@@ -734,7 +720,7 @@
 
               <div style="height:26px;"></div>
 
-              <p class="contact-label">Carreiras</p>
+              <p class="contact-label">Careers</p>
               <a class="contact-email" href="mailto:careers@rnext.agency">careers@rnext.agency</a>
 
               <div style="height:26px;"></div>
@@ -744,11 +730,11 @@
             </div>
           </div>
 
-          <div>
-            <h2 class="big">/escritórios</h2>
+          <div class="col">
+            <h2 class="section-title">/offices</h2>
 
             <div class="addr">
-              <h3>Europa</h3>
+              <h3>Europe</h3>
               <p>
                 3rd Floor, 86-90 Paul Street,<br>
                 London, EC2A 4NE, United Kingdom
@@ -807,4 +793,3 @@
   </script>
 </body>
 </html>
-```
