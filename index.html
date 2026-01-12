@@ -1,395 +1,255 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
   <title>R/Next</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#ffffff;
-      --text:#111827;
-      --black:#0b0b0b;
-      --accent:#f5a623;
-      --nav:#9aa0a6;
-
-      --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-      --max:1200px;
-
-      --header-h:120px;
-      --logo-h:64px;
-
-      --h1:64px;
-      --h1-lh:1.06;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--mont);
-      color:var(--text);
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      font-family: Montserrat, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
-
-    header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--header-h);
-      background:#fff;
-      z-index:50;
-      border-bottom:1px solid rgba(17,24,39,.08);
-    }
-    .header-inner{
-      height:var(--header-h);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      z-index: 100;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      padding:18px 0;
-      min-width:240px;
-    }
-    .brand img{
-      height:var(--logo-h);
-      width:auto;
-      display:block;
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    nav{
-      display:flex;
-      align-items:center;
-      gap:54px;
-      font-family:var(--mont);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-size:12px;
-      font-weight:600;
-    }
-    nav a{
-      position:relative;
-      color:var(--nav);
-      transition:color .15s ease;
-      padding:10px 0;
-    }
-    nav a:hover{ color:var(--accent); }
-    nav a.active{ color:var(--accent); }
-    nav a.active::after{
-      content:"";
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:3px;
-      width:26px;
-      height:2px;
-      background:var(--accent);
-      border-radius:2px;
+    .logo img {
+      height: 56px;
     }
 
-    main{padding-top:var(--header-h)}
-
-    .hero{
-      position:relative;
-      height:calc(100svh - var(--header-h));
-      min-height:520px;
-      overflow:hidden;
-      background:#0b0b0b;
-    }
-    .hero-media{
-      position:absolute;
-      inset:0;
-      will-change:transform;
-      transform:translate3d(0,0,0) scale(1.01);
-    }
-    .hero-media::before{
-      content:"";
-      position:absolute;
-      inset:-40px;
-      background-image:url("https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1599845625533-7BA5RTRGQAHAZMLSER2F/BANNER.jpg");
-      background-size:cover;
-      background-position:center;
-      filter:saturate(1.05) contrast(1.02);
-    }
-    .hero-media::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      /* filtro leve e sem faixa clara no final */
-      background:
-        radial-gradient(900px 420px at 40% 45%, rgba(0,0,0,.10), rgba(0,0,0,.26)),
-        linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.18)),
-        linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,.22) 100%);
+    nav a {
+      margin-left: 32px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #9a9a9a;
+      transition: color .2s ease;
     }
 
-    .hero-content{
-      position:relative;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:0 18px;
+    nav a.active,
+    nav a:hover {
+      color: #f5a623;
     }
 
-    .title-h1{
-      margin:0 0 22px 0;
-      font-family:var(--oswald);
-      font-weight:500;
-      color:#fff;
-      font-size:var(--h1);
-      line-height:var(--h1-lh);
-      letter-spacing:.01em;
-      text-shadow:0 10px 22px rgba(0,0,0,.22);
+    /* HERO */
+    .hero {
+      position: relative;
+      height: calc(100vh - 140px);
+      margin-top: 140px;
+      overflow: hidden;
     }
 
-    .btn-outline{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      height:54px;
-      padding:0 34px;
-      border:2px solid rgba(255,255,255,.75);
-      color:#fff;
-      font-family:var(--mont);
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-size:12px;
-      font-weight:700;
-      background:transparent;
-      transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
-      user-select:none;
-      transform:translateZ(0);
-    }
-    .btn-outline:hover{
-      transform:scale(1.04);
-      background:#fff;
-      color:#111827;
-      border-color:#fff;
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      background-image: url("banner.jpg");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      will-change: transform;
     }
 
-    .section-black{
-      background:var(--black);
-      color:#fff;
-      padding:86px 0 72px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:64px;
-      align-items:start;
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.25);
     }
 
-    .col{
-      text-align:center; /* padronizado: esquerda e direita */
+    .hero-content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
     }
 
-    .contact-block{
-      margin-top:18px;
-      max-width:520px;
-      margin-left:auto;
-      margin-right:auto;
+    h1 {
+      font-family: Oswald, sans-serif;
+      font-size: 56px;
+      font-weight: 500;
+      margin-bottom: 32px;
     }
 
-    .contact-label{
-      font-family:var(--mont);
-      letter-spacing:.06em;
-      font-size:14px;
-      font-weight:600;
-      margin:0 0 10px 0;
-      color:#fff;
-    }
-    .contact-email{
-      display:block;
-      font-size:18px;
-      color:rgba(255,255,255,.86);
-      margin:8px 0 0 0;
-      word-break:break-word;
+    .hero-button {
+      border: 2px solid #fff;
+      padding: 14px 36px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all .25s ease;
     }
 
-    .addr{
-      max-width:520px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .addr h3{
-      margin:18px 0 10px 0;
-      font-size:18px;
-      font-weight:600;
-      color:#fff;
-    }
-    .addr h3:first-child{ margin-top:20px; }
-    .addr p{
-      margin:0 0 26px 0;
-      color:rgba(255,255,255,.78);
-      line-height:1.8;
-      font-size:16px;
+    .hero-button:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
     }
 
-    footer{
-      background:#fff;
-      color:#5f6368;
-      text-align:center;
-      padding:22px 14px;
-      font-size:14px;
-      border-top:1px solid rgba(17,24,39,.08);
+    /* CONTACT SECTION */
+    .contact-section {
+      background: #000;
+      padding: 140px 48px;
     }
 
-    @media (max-width: 980px){
-      :root{
-        --header-h:110px;
-        --logo-h:58px;
-        --h1:52px;
+    .contact-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 120px;
+      align-items: center;
+    }
+
+    .contact-grid h2 {
+      font-family: Oswald, sans-serif;
+      font-size: 56px;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+
+    .contact-grid p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #d0d0d0;
+    }
+
+    .contact-grid strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #fff;
+      color: #000;
+      text-align: center;
+      padding: 40px 16px;
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      h1,
+      .contact-grid h2 {
+        font-size: 40px;
       }
-      nav{gap:34px}
-      .grid{gap:44px}
-    }
 
-    @media (max-width: 780px){
-      :root{
-        --header-h:96px;
-        --logo-h:52px;
-        --h1:44px;
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 80px;
+        text-align: center;
       }
-      .wrap{padding:0 18px}
-      nav{
-        gap:18px;
-        font-size:11px;
-        letter-spacing:.14em;
-      }
-      .grid{
-        grid-template-columns:1fr;
-        gap:52px;
-      }
-    }
 
-    @media (max-width: 520px){
-      :root{
-        --header-h:92px;
-        --logo-h:48px;
-        --h1:38px;
+      nav a {
+        margin-left: 20px;
+        font-size: 12px;
       }
-      .brand{min-width:auto}
-      nav{gap:14px}
-      .btn-outline{height:52px; padding:0 26px}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="wrap header-inner">
-      <div class="brand" aria-label="R/Next">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w"
-          alt="R/Next logo"
-        >
-      </div>
 
-      <nav aria-label="Navegação principal">
-        <a class="active" href="/">home</a>
-        <a href="/sobre">sobre</a>
-        <a href="/trabalhos">trabalhos</a>
-        <a href="/contato">contato</a>
-      </nav>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="logo.png" alt="R/Next">
     </div>
-  </header>
+    <nav>
+      <a href="/" class="active">HOME</a>
+      <a href="/sobre">SOBRE</a>
+      <a href="/trabalhos">TRABALHOS</a>
+      <a href="/contato">CONTATO</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="hero" aria-label="Banner principal">
-      <div class="hero-media" id="heroMedia"></div>
+<section class="hero">
+  <div class="hero-image" id="heroImage"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>R/Next. Marketing Hitmakers</h1>
+    <a href="/trabalhos" class="hero-button">WORKS >></a>
+  </div>
+</section>
 
-      <div class="hero-content">
-        <div>
-          <h1 class="title-h1">R/Next. Marketing Hitmakers</h1>
-          <a class="btn-outline" href="/trabalhos">trabalhos &gt;&gt;</a>
-        </div>
-      </div>
-    </section>
+<section class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <h2>/contato</h2>
+      <p>
+        <strong>New Business</strong><br>
+        newbusiness@rnext.com.br
+      </p>
+      <br>
+      <p>
+        <strong>Public Relations</strong><br>
+        press@rnext.com.br
+      </p>
+    </div>
+    <div>
+      <h2>/endereço</h2>
+      <p>
+        <strong>São Paulo</strong><br>
+        Rua Pais Leme, 215, Conj 1713, Pinheiros<br>
+        São Paulo, Brasil
+      </p>
+      <br>
+      <p>
+        <strong>Belo Horizonte</strong><br>
+        Rua Desembargador Jorge Fontana 112<br>
+        Belvedere, Belo Horizonte, Brasil
+      </p>
+    </div>
+  </div>
+</section>
 
-    <section class="section-black" aria-label="Contato e endereço">
-      <div class="wrap">
-        <div class="grid">
-          <div class="col">
-            <h2 class="title-h1">/contato</h2>
+<footer>
+  © 2025 R/Next. All rights reserved.
+</footer>
 
-            <div class="contact-block">
-              <p class="contact-label">New Business</p>
-              <a class="contact-email" href="mailto:newbusiness@rnext.com.br">newbusiness@rnext.com.br</a>
+<script>
+  const hero = document.getElementById("heroImage");
 
-              <div style="height:26px;"></div>
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    hero.style.transform = `scale(${1.05 + y * 0.00015}) translateY(${y * 0.08}px)`;
+  });
+</script>
 
-              <p class="contact-label">Public Relations</p>
-              <a class="contact-email" href="mailto:press@rnext.com.br">press@rnext.com.br</a>
-            </div>
-          </div>
-
-          <div class="col">
-            <h2 class="title-h1">/endereço</h2>
-
-            <div class="addr">
-              <h3>São Paulo</h3>
-              <p>
-                Rua Pais Leme, 215, Conj 1713, Pinheiros<br>
-                São Paulo, Brasil
-              </p>
-
-              <h3>Belo Horizonte</h3>
-              <p>
-                Rua Desembargador Jorge Fontana 112,<br>
-                Belvedere, Belo Horizonte, Brasil
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      © 2025 R/Next. All rights reserved.
-    </footer>
-  </main>
-
-  <script>
-    (function () {
-      const media = document.getElementById("heroMedia");
-
-      function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
-      function update(){
-        const y = window.scrollY || 0;
-
-        const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 0;
-        const heroH = Math.max(1, window.innerHeight - headerH);
-
-        const t = clamp(y / heroH, 0, 1);
-
-        /* reduzi 2/3: antes (0.06 e 0.12). Agora (0.02 e 0.04) */
-        const scale = 1.01 + (t * 0.02);
-        const translate = (y * 0.04);
-
-        media.style.transform = "translate3d(0," + (-translate) + "px,0) scale(" + scale.toFixed(4) + ")";
-      }
-
-      update();
-      window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
-    })();
-  </script>
 </body>
 </html>
