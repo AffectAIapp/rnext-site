@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -18,7 +17,6 @@
       --black:#0b0b0b;
       --accent:#f5a623;
       --nav:#9aa0a6;
-      --border:rgba(255,255,255,.35);
       --shadow:0 14px 30px rgba(0,0,0,.18);
       --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -73,12 +71,32 @@
       text-transform:uppercase;
       font-size:14px;
     }
+
     nav a{
+      position:relative;
       color:var(--nav);
       transition:color .15s ease;
+      padding:10px 2px;
     }
-    nav a.active{color:var(--accent)}
+
+    /* detalhe amarelo no hover e ativo (tracinho embaixo) */
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:4px;
+      width:0;
+      height:2px;
+      background:var(--accent);
+      transform:translateX(-50%);
+      opacity:0;
+      transition:width .16s ease, opacity .16s ease;
+    }
     nav a:hover{color:#5f6368}
+    nav a:hover::after{width:18px; opacity:1}
+
+    nav a.active{color:var(--accent)}
+    nav a.active::after{width:18px; opacity:1}
 
     main{padding-top:78px}
 
@@ -111,7 +129,6 @@
       background:
         radial-gradient(900px 420px at 40% 45%, rgba(0,0,0,.20), rgba(0,0,0,.52)),
         linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,.45));
-      mix-blend-mode:normal;
     }
 
     .hero-content{
@@ -210,7 +227,7 @@
     .contact-block{
       margin-top:6px;
       text-align:center;
-      max-width:320px;
+      max-width:360px;
     }
     .contact-label{
       font-family:var(--oswald);
@@ -228,6 +245,9 @@
       word-break:break-word;
     }
 
+    .addr{
+      text-align:center;
+    }
     .addr h3{
       margin:0 0 10px 0;
       font-size:18px;
@@ -248,6 +268,12 @@
       padding:22px 14px;
       font-size:14px;
       border-top:1px solid rgba(17,24,39,.08);
+    }
+    footer .wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
     }
     footer a{
       color:#5f6368;
@@ -281,8 +307,6 @@
         grid-template-columns:1fr;
         gap:52px;
       }
-
-      /* AJUSTE SOLICITADO: texto centralizado no mobile */
       .contact-block{
         text-align:center;
         max-width:none;
@@ -290,7 +314,6 @@
       .addr{
         text-align:center;
       }
-
       .slash-title{
         font-size:58px;
         margin-bottom:26px;
@@ -305,9 +328,9 @@
       .btn-outline{height:52px; padding:0 24px}
       .contact-hero{height:220px}
       .slash-title{font-size:52px}
+      nav a::after{bottom:3px}
     }
 
-    /* âncoras */
     section{scroll-margin-top:90px}
   </style>
 </head>
@@ -320,10 +343,8 @@
       </div>
 
       <nav aria-label="Navegação principal">
-        <a class="active" href="#home">início</a>
-        <a href="#sobre">sobre</a>
-        <a href="#trabalhos">trabalhos</a>
-        <a href="#contato">contato</a>
+        <a class="active" href="#home">home</a>
+        <a href="#contato">contact</a>
       </nav>
     </div>
   </header>
@@ -335,26 +356,8 @@
       <div class="hero-content">
         <div>
           <h1>R/Next. Marketing Hitmakers</h1>
-          <a class="btn-outline" href="#trabalhos">trabalhos &gt;&gt;</a>
+          <a class="btn-outline" href="#contato">contact &gt;&gt;</a>
         </div>
-      </div>
-    </section>
-
-    <section id="sobre" style="padding:64px 0;">
-      <div class="wrap" style="max-width: 920px; text-align:center;">
-        <h2 style="font-family: var(--oswald); font-size: 36px; letter-spacing: .02em; margin: 0 0 14px 0;">Sobre</h2>
-        <p style="margin:0; color: var(--muted); line-height: 1.9; font-size: 16px;">
-          Uma agência focada em ideias que viram resultado. Estratégia, criação e execução com obsessão por impacto.
-        </p>
-      </div>
-    </section>
-
-    <section id="trabalhos" style="padding:64px 0; border-top:1px solid rgba(17,24,39,.08);">
-      <div class="wrap" style="max-width: 920px; text-align:center;">
-        <h2 style="font-family: var(--oswald); font-size: 36px; letter-spacing: .02em; margin: 0 0 14px 0;">Trabalhos</h2>
-        <p style="margin:0; color: var(--muted); line-height: 1.9; font-size: 16px;">
-          Selecione seus cases e substitua este texto quando quiser. A seção está pronta para receber grid, cards ou links.
-        </p>
       </div>
     </section>
 
@@ -368,13 +371,8 @@
           <div>
             <h2 class="slash-title">/contato</h2>
             <div class="contact-block">
-              <p class="contact-label">New Business</p>
-              <a class="contact-email" href="mailto:newbusiness@rnext.com.br">newbusiness@rnext.com.br</a>
-
-              <div style="height:26px;"></div>
-
-              <p class="contact-label">Public Relations</p>
-              <a class="contact-email" href="mailto:press@rnext.com.br">press@rnext.com.br</a>
+              <p class="contact-label">PR</p>
+              <a class="contact-email" href="mailto:imprensa@rnext.com.br">imprensa@rnext.com.br</a>
             </div>
           </div>
 
@@ -400,7 +398,9 @@
     </section>
 
     <footer>
-      © 2025 R/Next. Parte do <a href="#" onclick="return false;">Ven3 Group</a>. Todos os direitos reservados.
+      <div class="wrap">
+        © 2025 R/Next. Part of <a href="#" onclick="return false;">Ven3 Group</a>. All rights reserved.
+      </div>
     </footer>
   </main>
 
@@ -417,7 +417,7 @@
           const topInDoc = rect.top + y;
 
           const distance = (y - topInDoc) * speed;
-          el.style.transform = "translate3d(0," + (distance) + "px,0)";
+          el.style.transform = "translate3d(0," + distance + "px,0)";
         }
       }
 
@@ -428,4 +428,3 @@
   </script>
 </body>
 </html>
-```
