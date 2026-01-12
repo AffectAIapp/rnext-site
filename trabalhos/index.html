@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -31,24 +32,42 @@
 
       --h1:56px;
       --h1-lh:1.06;
+
+      /* Respiro entre projetos (3x) */
+      --section-pad-y:132px;     /* antes 44px */
+      --divider-gap-y:84px;      /* respiro ao redor do divisor */
+      --banner-gap-top:132px;    /* respiro antes dos banners */
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
+
+    html,body{
+      height:100%;
+      width:100%;
+      overflow-x:hidden;
+    }
+    @supports (overflow: clip){
+      html,body{ overflow-x:clip; }
+    }
+
     body{
       margin:0;
       font-family:var(--mont);
       color:var(--text);
-      background: #f5f2f2;
+      background:#f5f2f2;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+      touch-action:pan-y;
     }
 
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
 
-    /* HEADER (same identity) */
+    /* trava qualquer mídia para nunca estourar viewport */
+    img, video, iframe{ max-width:100%; }
+    header, main, section, footer, .page, .wrap{ overflow-x:clip; }
+
+    /* HEADER */
     header{
       position:fixed;
       top:0; left:0; right:0;
@@ -165,6 +184,7 @@
       display:flex;
       flex-direction:column;
       gap:14px;
+      overflow-x:clip;
     }
     .drawer .drawer-top{
       height:var(--header-h);
@@ -201,7 +221,10 @@
 
     body.menu-open .drawer-overlay{ opacity:1; pointer-events:auto; }
     body.menu-open .drawer{ transform:translateX(0); }
-    body.menu-open{ overflow:hidden; touch-action:none; }
+    body.menu-open{
+      overflow:hidden;
+      touch-action:none;
+    }
 
     /* PAGE */
     .page{
@@ -209,14 +232,14 @@
     }
 
     .section{
-      padding:44px 0;
+      padding:var(--section-pad-y) 0;
     }
 
     .divider{
       height:1px;
       background:var(--line);
       width:100%;
-      margin:0;
+      margin:var(--divider-gap-y) 0;
     }
 
     .two-col{
@@ -245,9 +268,7 @@
     }
     .desc .muted{ color:rgba(0,0,0,.7); }
 
-    .media{
-      margin-top:28px;
-    }
+    .media{ margin-top:32px; }
 
     .media img{
       width:100%;
@@ -287,7 +308,12 @@
     }
 
     .banner{
-      margin:44px 0 0;
+      margin:var(--banner-gap-top) 0 0;
+    }
+    .banner img{
+      width:100%;
+      height:auto;
+      display:block;
     }
 
     footer{
@@ -304,6 +330,9 @@
         --header-h:104px;
         --logo-h:40px;
         --h1:48px;
+        --section-pad-y:120px;
+        --divider-gap-y:76px;
+        --banner-gap-top:120px;
       }
       nav{gap:34px}
       .two-col{gap:40px}
@@ -315,13 +344,15 @@
         --header-h:92px;
         --logo-h:36px;
         --drawer-w:340px;
+        --section-pad-y:96px;
+        --divider-gap-y:60px;
+        --banner-gap-top:96px;
       }
       .wrap{padding:0 18px}
       nav{display:none}
       .menu-btn{display:inline-flex}
       .brand{min-width:auto; padding:14px 0}
       .two-col{grid-template-columns:1fr; gap:22px}
-      .section{padding:36px 0}
     }
 
     @media (max-width: 520px){
@@ -329,6 +360,9 @@
         --header-h:86px;
         --logo-h:34px;
         --drawer-w:320px;
+        --section-pad-y:84px;
+        --divider-gap-y:52px;
+        --banner-gap-top:84px;
       }
       .brand{padding:12px 0}
       .kicker{font-size:24px}
@@ -524,196 +558,5 @@
 
             <div class="grid-2">
               <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/brasileiras.gif" alt="Brasileiras">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/jamaicanas%2B%281%29.gif" alt="Jamaicanas">
-            </div>
-
-            <div class="grid-2" style="grid-template-columns: 1.2fr .8fr;">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/mkp_jornal.jpg" alt="Jornal">
-              <div class="stack" style="margin-top:0;">
-                <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/californianas.gif" alt="Californianas">
-                <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/venezianas.gif" alt="Venezianas">
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/live_p1.gif" alt="Live 1">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/live_p2.gif" alt="Live 2">
-            </div>
-
-            <div class="video" aria-label="Vídeo Vimeo">
-              <iframe src="https://player.vimeo.com/video/816283865?controls=0" allow="fullscreen" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <div class="two-col">
-            <div>
-              <h2 class="kicker">Produto e mobile</h2>
-            </div>
-            <div class="desc">
-              <p style="margin:0; font-weight:600;">CONTROLL SOCKS</p>
-              <div style="height:10px;"></div>
-              <p style="margin:0;">
-                Dar meias de presente é sem graça e quase sempre gera sorrisos forçados.
-                Para acabar com essa "ingratidão", pensamos: se o sorriso não vem por vontade própria, vem "na marra".
-                Criamos a Controll Socks, meias controladas pelo celular, para fazer cócegas remotamente nos pés dos seus amigos.
-              </p>
-            </div>
-          </div>
-
-          <div class="media">
-            <div class="stack">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Socks.jpg" alt="Controll Socks">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/1250.jpg" alt="Controll Socks">
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <div class="two-col">
-            <div>
-              <h2 class="kicker">Anúncio de sticker no WhatsApp</h2>
-            </div>
-            <p class="desc">
-              Para divulgar as ofertas de Black Friday da rede de varejo Super Nosso, criamos a
-              <strong>primeira campanha com stickers de WhatsApp do mundo</strong>.
-              Nas peças, os produtos estão vazados, como se estivessem desaparecidos.
-            </p>
-          </div>
-
-          <div class="media">
-            <div class="stack">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Board_STICKER.png" alt="Board Sticker">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-11-27%2Bat%2B9.06.02%2BAM.png" alt="Print 1">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/tela.png" alt="Tela 1">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/tela_1.png" alt="Tela 2">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/telas.png" alt="Telas">
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section">
-          <div class="two-col">
-            <div>
-              <h2 class="kicker">Campanha viral</h2>
-            </div>
-            <p class="desc">
-              Invasões de campo costumam ser mal vistas. Bom, quase todas.
-              Quando um cachorro foge da segurança e corre pelo gramado, vira alegria pura.
-              Uma iniciativa do Cruzeiro e do Mineirão que usa o futebol para incentivar a adoção de pets.
-            </p>
-          </div>
-
-          <div class="media">
-            <div class="video" aria-label="Vídeo Vimeo">
-              <iframe src="https://player.vimeo.com/video/816283767" allow="fullscreen" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div class="banner">
-          <img
-            src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/banner-transparente.png"
-            alt=""
-          >
-        </div>
-
-        <div class="section" style="padding-top:34px;">
-          <div class="media">
-            <div class="stack">
-              <div class="video"><iframe src="https://player.vimeo.com/video/816344212" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816283891" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816283800" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816283962" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816284013" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816283647" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816283838" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816524977" allow="fullscreen" allowfullscreen></iframe></div>
-              <div class="video"><iframe src="https://player.vimeo.com/video/816521720?controls=0" allow="fullscreen" allowfullscreen></iframe></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="banner">
-          <img
-            src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/banner-transparente.png"
-            alt=""
-          >
-        </div>
-
-        <div class="section" style="padding-top:34px;">
-          <div class="media">
-            <div class="stack">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/af4ec7a59d5761ae05e85eacb58d09cd.jpg" alt="Print 1">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/95854974e1e0730c080ed48ae97c92bc.jpg" alt="Print 2">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/fc3ed85995725a88ed2735d1da24b9e1.jpg" alt="Print 3">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%283%29_1.jpeg" alt="Imagem 4">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%285%29.jpeg" alt="Imagem 5">
-            </div>
-          </div>
-        </div>
-
-        <div class="section" style="padding-top:0;">
-          <div class="media">
-            <div class="stack">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%287%29.jpeg" alt="Imagem 6">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%288%29.jpeg" alt="Imagem 7">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%289%29.jpeg" alt="Imagem 8">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%2810%29.jpeg" alt="Imagem 9">
-              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%2811%29.jpeg" alt="Imagem 10">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <footer>
-      © 2025 R/Next. All rights reserved.
-    </footer>
-  </main>
-
-  <script>
-    (function () {
-      const btn = document.getElementById("menuBtn");
-      const closeBtn = document.getElementById("menuClose");
-      const overlay = document.getElementById("drawerOverlay");
-      const drawer = document.getElementById("drawer");
-
-      function openMenu(){
-        document.body.classList.add("menu-open");
-        btn.setAttribute("aria-expanded", "true");
-        overlay.setAttribute("aria-hidden", "false");
-        drawer.setAttribute("aria-hidden", "false");
-      }
-
-      function closeMenu(){
-        document.body.classList.remove("menu-open");
-        btn.setAttribute("aria-expanded", "false");
-        overlay.setAttribute("aria-hidden", "true");
-        drawer.setAttribute("aria-hidden", "true");
-      }
-
-      btn.addEventListener("click", openMenu);
-      closeBtn.addEventListener("click", closeMenu);
-      overlay.addEventListener("click", closeMenu);
-
-      document.addEventListener("keydown", function(e){
-        if(e.key === "Escape") closeMenu();
-      });
-
-      drawer.addEventListener("click", function(e){
-        const a = e.target && e.target.closest && e.target.closest("a");
-        if(a) closeMenu();
-      });
-    })();
-  </script>
-</body>
-</html>
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_322283ه
+```
