@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -37,7 +38,8 @@
       --h2:64px;
       --h2-lh:1.04;
 
-      --body:16px;
+      /* texto +1px */
+      --body:17px;
     }
 
     *{box-sizing:border-box}
@@ -117,7 +119,7 @@
 
     main{padding-top:var(--header-h)}
 
-    /* layout base das seções */
+    /* base */
     .section{
       padding:72px 0;
       background:#fff;
@@ -140,14 +142,14 @@
       margin:0 auto 26px;
     }
 
-    /* ABOUT HERO */
+    /* topo */
     .about-hero{
       padding:46px 0 46px;
     }
     .about-hero .headline{
       margin:0;
       font-family:var(--oswald);
-      font-weight:700;
+      font-weight:600; /* menos bold */
       color:var(--headline);
       font-size:var(--display);
       line-height:var(--display-lh);
@@ -156,9 +158,6 @@
     }
 
     .content-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:0;
       max-width:760px;
       margin:0 auto;
       padding:52px 0 0;
@@ -179,11 +178,12 @@
       color:rgba(17,24,39,.80);
     }
 
-    /* STATS (laranja) */
+    /* faixa laranja */
     .band{
       background:var(--sand);
       padding:92px 0;
     }
+
     .stats{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -222,11 +222,10 @@
     }
     .stat-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
 
-    /* TITULOS internas */
     .title{
       margin:0;
       font-family:var(--oswald);
-      font-weight:700;
+      font-weight:600; /* menos bold */
       color:var(--headline);
       font-size:var(--h2);
       line-height:var(--h2-lh);
@@ -240,7 +239,7 @@
       padding-top:44px;
     }
 
-    /* AWARDS (laranja com ícones) */
+    /* prêmios com imagens */
     .awards{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -251,11 +250,14 @@
       text-align:center;
     }
     .badge{
-      width:110px;
-      height:110px;
+      width:118px;
+      height:auto;
       margin:0 auto 18px;
-      opacity:.95;
+      display:block;
+      opacity:.98;
     }
+    .awards .badge{ max-height:92px; }
+
     .award-title{
       margin:0;
       font-family:var(--oswald);
@@ -274,7 +276,7 @@
     }
     .award-foot strong{ font-weight:700; color:rgba(0,0,0,.86); }
 
-    /* CONTATO (preto) */
+    /* seção preta */
     .section-black{
       background:var(--black);
       color:#fff;
@@ -290,7 +292,7 @@
     .section-black .big{
       margin:0 0 26px 0;
       font-family:var(--oswald);
-      font-weight:700;
+      font-weight:600; /* menos bold */
       font-size:60px;
       line-height:1.02;
       color:#fff;
@@ -334,6 +336,7 @@
       font-size:16px;
     }
 
+    /* rodapé igual ao index aprovado */
     footer{
       background:#fff;
       color:#5f6368;
@@ -344,7 +347,7 @@
       box-shadow:0 -1px 0 rgba(17,24,39,.08);
     }
 
-    /* HAMBURGER (mobile) */
+    /* HAMBURGER */
     .menu-btn{
       display:none;
       align-items:center;
@@ -506,14 +509,15 @@
 
         --display:46px;
         --h2:42px;
-        --body:15px;
+        --body:16px;
       }
       .brand{padding:12px 0}
       .section{ padding:64px 0; }
       .about-hero{ padding:38px 0 38px; }
       .content-grid{ padding-top:42px; }
       .band{ padding:78px 0; }
-      .badge{ width:96px; height:96px; }
+      .badge{ width:112px; }
+      .awards .badge{ max-height:88px; }
     }
   </style>
 </head>
@@ -570,7 +574,6 @@
   </aside>
 
   <main>
-    <!-- topo, linha, headline -->
     <section class="section about-hero tight">
       <div class="wrap">
         <div class="divider"></div>
@@ -603,7 +606,6 @@
       </div>
     </section>
 
-    <!-- faixa laranja: números -->
     <section class="band" aria-label="Números e alcance">
       <div class="wrap">
         <div class="stats">
@@ -628,7 +630,6 @@
       </div>
     </section>
 
-    <!-- leadership -->
     <section class="section" aria-label="Liderança">
       <div class="wrap">
         <div class="kicker"></div>
@@ -653,7 +654,6 @@
       </div>
     </section>
 
-    <!-- young lions -->
     <section class="section no-top" aria-label="Young Lions">
       <div class="wrap">
         <h2 class="title" style="text-align:left; max-width:760px; margin:0 auto;">Young Lions</h2>
@@ -671,17 +671,17 @@
       </div>
     </section>
 
-    <!-- faixa laranja: awards -->
     <section class="band" aria-label="Reconhecimentos">
       <div class="wrap">
         <div class="awards">
           <div>
-            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
-              <path d="M60 18c18 0 32 14 32 32 0 10-4 19-11 25-5 4-8 10-9 18H48c-1-8-4-14-9-18-7-6-11-15-11-25 0-18 14-32 32-32Z"
-                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M44 96c10 6 22 6 32 0" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M52 36c6-6 16-6 22 0" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-            </svg>
+            <img
+              class="badge"
+              src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1594775840041-AKWEGRN8HPBNRVB7R419/LOGOS100px.png?format=500w"
+              alt="Cannes Lions"
+              loading="lazy"
+              decoding="async"
+            >
 
             <p class="award-title">Cannes<br>Lions</p>
             <p class="award-foot">
@@ -690,13 +690,13 @@
           </div>
 
           <div>
-            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
-              <path d="M32 30h56v16H32z" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linejoin="round"/>
-              <path d="M38 46v44c0 8 6 14 14 14h16c8 0 14-6 14-14V46"
-                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M34 30l6-10h40l6 10" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M50 62h20" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-            </svg>
+            <img
+              class="badge"
+              src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1594775840041-AKWEGRN8HPBNRVB7R419/LOGOS100px.png?format=500w"
+              alt="Cannes Lions"
+              loading="lazy"
+              decoding="async"
+            >
 
             <p class="award-title">Mais<br>premiado</p>
             <p class="award-foot">
@@ -705,14 +705,13 @@
           </div>
 
           <div>
-            <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
-              <path d="M24 70c10-18 24-26 36-26 12 0 22 6 30 18"
-                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M32 72c6 10 14 16 22 16 8 0 16-6 22-16"
-                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-              <path d="M48 44c-4-10 2-18 12-18s16 8 12 18"
-                    fill="none" stroke="rgba(255,255,255,.92)" stroke-width="4" stroke-linecap="round"/>
-            </svg>
+            <img
+              class="badge"
+              src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/1594777511662-GVSQS8IMBY7HX6I6Q42N/young.png?format=500w"
+              alt="Young Lions"
+              loading="lazy"
+              decoding="async"
+            >
 
             <p class="award-title">Young<br>Lions</p>
             <p class="award-foot">
@@ -723,7 +722,6 @@
       </div>
     </section>
 
-    <!-- contato e escritórios -->
     <section class="section-black" aria-label="Contato e escritórios">
       <div class="wrap">
         <div class="grid-black">
@@ -809,3 +807,4 @@
   </script>
 </body>
 </html>
+```
