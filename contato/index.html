@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R/Next | Contact</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --black:#0b0b0b;
+      --accent:#f5a623;
+      --nav:#9aa0a6;
+
+      --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      --max:1200px;
+
+      /* HEADER (same as approved) */
+      --header-h:110px;
+      --logo-h:44px;
+
+      /* base */
+      --h1:64px;
+      --h1-lh:1.06;
+
+      --drawer-w:320px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--mont);
+      color:var(--text);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--header-h);
+      background:#fff;
+      z-index:50;
+      border-bottom:none;
+      box-shadow:0 1px 0 rgba(17,24,39,.08);
+    }
+    .header-inner{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:18px 0;
+      min-width:220px;
+    }
+    .brand img{
+      height:var(--logo-h);
+      width:auto;
+      display:block;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:54px;
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:600;
+    }
+    nav a{
+      color:var(--nav);
+      transition:color .15s ease;
+      padding:10px 0;
+      position:relative;
+    }
+    nav a:hover{ color:var(--accent); }
+
+    nav a.active{ color:var(--accent); }
+    nav a.active::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:3px;
+      width:26px;
+      height:2px;
+      background:var(--accent);
+      border-radius:2px;
+    }
+
+    main{padding-top:var(--header-h)}
+
+    /* BLACK SECTION (same as approved) */
+    .section-black{
+      background:var(--black);
+      color:#fff;
+      padding:86px 0 72px;
+      position:relative;
+      z-index:5;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:64px;
+      align-items:start;
+    }
+    .col{ text-align:center; }
+
+    .section-title{
+      margin:0 0 22px 0;
+      font-family:var(--oswald);
+      font-weight:500;
+      color:#fff;
+      font-size:var(--h1);
+      line-height:var(--h1-lh);
+      letter-spacing:.01em;
+    }
+
+    .contact-block{
+      margin-top:18px;
+      max-width:520px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .contact-label{
+      font-family:var(--mont);
+      letter-spacing:.02em;
+      font-size:16px;
+      font-weight:600;
+      margin:0 0 10px 0;
+      color:#fff;
+      text-transform:none;
+    }
+    .contact-email{
+      display:block;
+      font-size:18px;
+      color:rgba(255,255,255,.86);
+      margin:8px 0 0 0;
+      word-break:break-word;
+    }
+
+    .addr{
+      max-width:520px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .addr h3{
+      margin:18px 0 10px 0;
+      font-size:18px;
+      font-weight:600;
+      color:#fff;
+    }
+    .addr h3:first-child{ margin-top:20px; }
+    .addr p{
+      margin:0 0 26px 0;
+      color:rgba(255,255,255,.78);
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    footer{
+      background:#fff;
+      color:#5f6368;
+      text-align:center;
+      padding:22px 14px;
+      font-size:14px;
+      border-top:none;
+      box-shadow:0 -1px 0 rgba(17,24,39,.08);
+    }
+
+    /* HAMBURGER (same as approved) */
+    .menu-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:46px;
+      height:46px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      border-radius:10px;
+      transition:background .15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .burger{
+      width:22px;
+      height:16px;
+      position:relative;
+    }
+    .burger span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:var(--nav);
+      border-radius:2px;
+      transition:transform .22s ease, top .22s ease, opacity .18s ease, background .15s ease;
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:7px; }
+    .burger span:nth-child(3){ top:14px; }
+
+    body.menu-open .burger span{ background:var(--accent); }
+    body.menu-open .burger span:nth-child(1){ top:7px; transform:rotate(45deg); }
+    body.menu-open .burger span:nth-child(2){ opacity:0; }
+    body.menu-open .burger span:nth-child(3){ top:7px; transform:rotate(-45deg); }
+
+    /* Drawer */
+    .drawer-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease;
+      z-index:60;
+    }
+    .drawer{
+      position:fixed;
+      top:0;
+      right:0;
+      height:100%;
+      width:min(var(--drawer-w), 86vw);
+      background:#fff;
+      box-shadow:-20px 0 60px rgba(0,0,0,.18);
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.2,.85,.2,1);
+      z-index:70;
+      padding:22px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .drawer .drawer-top{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6px;
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:10px 6px 22px;
+    }
+    .drawer-nav a{
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      font-weight:700;
+      color:var(--nav);
+      padding:14px 10px;
+      border-radius:12px;
+      transition:background .15s ease, color .15s ease;
+    }
+    .drawer-nav a:hover{
+      background:rgba(245,166,35,.12);
+      color:var(--accent);
+    }
+    .drawer-nav a.active{
+      color:var(--accent);
+      background:rgba(245,166,35,.12);
+    }
+
+    body.menu-open .drawer-overlay{
+      opacity:1;
+      pointer-events:auto;
+    }
+    body.menu-open .drawer{
+      transform:translateX(0);
+    }
+    body.menu-open{
+      overflow:hidden;
+      touch-action:none;
+    }
+
+    @media (max-width: 980px){
+      :root{
+        --header-h:104px;
+        --logo-h:40px;
+        --h1:52px;
+      }
+      nav{gap:34px}
+      .grid{gap:44px}
+      .brand{padding:16px 0}
+    }
+
+    @media (max-width: 780px){
+      :root{
+        --header-h:92px;
+        --logo-h:36px;
+        --h1:44px;
+        --drawer-w:340px;
+      }
+      .wrap{padding:0 18px}
+      nav{ display:none; }
+      .menu-btn{ display:inline-flex; }
+      .brand{min-width:auto; padding:14px 0}
+      .grid{
+        grid-template-columns:1fr;
+        gap:52px;
+      }
+    }
+
+    @media (max-width: 520px){
+      :root{
+        --header-h:86px;
+        --logo-h:34px;
+        --h1:38px;
+        --drawer-w:320px;
+      }
+      .brand{padding:12px 0}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <div class="brand" aria-label="R/Next">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w"
+          alt="R/Next logo"
+        >
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a href="/">home</a>
+        <a href="/sobre">about</a>
+        <a href="/trabalhos">works</a>
+        <a class="active" href="/contato">contact</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Mobile menu" aria-hidden="true">
+    <div class="drawer-top">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=300w"
+          alt="R/Next"
+          style="height:28px; width:auto; display:block;"
+        >
+      </div>
+
+      <button class="menu-btn" id="menuClose" aria-label="Close menu">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Mobile navigation">
+      <a href="/">home</a>
+      <a href="/sobre">about</a>
+      <a href="/trabalhos">works</a>
+      <a class="active" href="/contato">contact</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="section-black" aria-label="Contact and offices">
+      <div class="wrap">
+        <div class="grid">
+          <div class="col">
+            <h2 class="section-title">/contact us</h2>
+
+            <div class="contact-block">
+              <p class="contact-label">New Business</p>
+              <a class="contact-email" href="mailto:newbusiness@rnext.com.br">newbusiness@rnext.com.br</a>
+
+              <div style="height:26px;"></div>
+
+              <p class="contact-label">Public Relations</p>
+              <a class="contact-email" href="mailto:press@rnext.com.br">press@rnext.com.br</a>
+            </div>
+          </div>
+
+          <div class="col">
+            <h2 class="section-title">/offices</h2>
+
+            <div class="addr">
+              <h3>São Paulo</h3>
+              <p>
+                Rua Pais Leme, 215, Conj 1713, Pinheiros<br>
+                São Paulo, Brazil
+              </p>
+
+              <h3>Belo Horizonte</h3>
+              <p style="margin-bottom:0;">
+                Rua Desembargador Jorge Fontana 112,<br>
+                Belvedere, Belo Horizonte, Brazil
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 R/Next. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("menuClose");
+      const overlay = document.getElementById("drawerOverlay");
+      const drawer = document.getElementById("drawer");
+
+      function openMenu(){
+        document.body.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+        overlay.setAttribute("aria-hidden", "false");
+        drawer.setAttribute("aria-hidden", "false");
+      }
+
+      function closeMenu(){
+        document.body.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+        overlay.setAttribute("aria-hidden", "true");
+        drawer.setAttribute("aria-hidden", "true");
+      }
+
+      btn.addEventListener("click", openMenu);
+      closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+
+      document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeMenu();
+      });
+
+      drawer.addEventListener("click", function(e){
+        const a = e.target && e.target.closest && e.target.closest("a");
+        if(a) closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>
