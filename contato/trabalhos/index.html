@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R/Next | Trabalhos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --black:#0b0b0b;
+      --accent:#f5a623;
+      --nav:#9aa0a6;
+      --muted:#6b7280;
+      --line:rgba(17,24,39,.16);
+
+      --oswald:"Oswald", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mont:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      --max:1200px;
+
+      --header-h:110px;
+      --logo-h:44px;
+
+      --drawer-w:320px;
+
+      --h1:56px;
+      --h1-lh:1.06;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--mont);
+      color:var(--text);
+      background: #f5f2f2;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+
+    /* HEADER (same identity) */
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--header-h);
+      background:#fff;
+      z-index:50;
+      box-shadow:0 1px 0 rgba(17,24,39,.08);
+    }
+    .header-inner{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:18px 0;
+      min-width:220px;
+    }
+    .brand img{
+      height:var(--logo-h);
+      width:auto;
+      display:block;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:54px;
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:600;
+    }
+    nav a{
+      color:var(--nav);
+      transition:color .15s ease;
+      padding:10px 0;
+      position:relative;
+    }
+    nav a:hover{ color:var(--accent); }
+    nav a.active{ color:var(--accent); }
+    nav a.active::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:3px;
+      width:26px;
+      height:2px;
+      background:var(--accent);
+      border-radius:2px;
+    }
+
+    main{padding-top:var(--header-h)}
+
+    /* HAMBURGER */
+    .menu-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:46px;
+      height:46px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      border-radius:10px;
+      transition:background .15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .burger{ width:22px; height:16px; position:relative; }
+    .burger span{
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      background:var(--nav);
+      border-radius:2px;
+      transition:transform .22s ease, top .22s ease, opacity .18s ease, background .15s ease;
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:7px; }
+    .burger span:nth-child(3){ top:14px; }
+
+    body.menu-open .burger span{ background:var(--accent); }
+    body.menu-open .burger span:nth-child(1){ top:7px; transform:rotate(45deg); }
+    body.menu-open .burger span:nth-child(2){ opacity:0; }
+    body.menu-open .burger span:nth-child(3){ top:7px; transform:rotate(-45deg); }
+
+    .drawer-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease;
+      z-index:60;
+    }
+    .drawer{
+      position:fixed;
+      top:0;
+      right:0;
+      height:100%;
+      width:min(var(--drawer-w), 86vw);
+      background:#fff;
+      box-shadow:-20px 0 60px rgba(0,0,0,.18);
+      transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.2,.85,.2,1);
+      z-index:70;
+      padding:22px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .drawer .drawer-top{
+      height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6px;
+    }
+    .drawer-nav{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:10px 6px 22px;
+    }
+    .drawer-nav a{
+      font-family:var(--mont);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      font-weight:700;
+      color:var(--nav);
+      padding:14px 10px;
+      border-radius:12px;
+      transition:background .15s ease, color .15s ease;
+    }
+    .drawer-nav a:hover{
+      background:rgba(245,166,35,.12);
+      color:var(--accent);
+    }
+    .drawer-nav a.active{
+      color:var(--accent);
+      background:rgba(245,166,35,.12);
+    }
+
+    body.menu-open .drawer-overlay{ opacity:1; pointer-events:auto; }
+    body.menu-open .drawer{ transform:translateX(0); }
+    body.menu-open{ overflow:hidden; touch-action:none; }
+
+    /* PAGE */
+    .page{
+      padding:34px 0 70px;
+    }
+
+    .section{
+      padding:44px 0;
+    }
+
+    .divider{
+      height:1px;
+      background:var(--line);
+      width:100%;
+      margin:0;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:54px;
+      align-items:start;
+    }
+
+    .kicker{
+      margin:0;
+      font-family:var(--oswald);
+      font-weight:500;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      font-size:28px;
+      line-height:1.1;
+      color:#000;
+    }
+
+    .desc{
+      margin:0;
+      font-size:16px;
+      line-height:1.7;
+      color:#000;
+    }
+    .desc .muted{ color:rgba(0,0,0,.7); }
+
+    .media{
+      margin-top:28px;
+    }
+
+    .media img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      align-items:start;
+      margin-top:22px;
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+      margin-top:22px;
+    }
+
+    .video{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      background:#000;
+      overflow:hidden;
+      border-radius:0;
+    }
+    .video iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .banner{
+      margin:44px 0 0;
+    }
+
+    footer{
+      background:#fff;
+      color:#5f6368;
+      text-align:center;
+      padding:22px 14px;
+      font-size:14px;
+      box-shadow:0 -1px 0 rgba(17,24,39,.08);
+    }
+
+    @media (max-width: 980px){
+      :root{
+        --header-h:104px;
+        --logo-h:40px;
+        --h1:48px;
+      }
+      nav{gap:34px}
+      .two-col{gap:40px}
+      .brand{padding:16px 0}
+    }
+
+    @media (max-width: 780px){
+      :root{
+        --header-h:92px;
+        --logo-h:36px;
+        --drawer-w:340px;
+      }
+      .wrap{padding:0 18px}
+      nav{display:none}
+      .menu-btn{display:inline-flex}
+      .brand{min-width:auto; padding:14px 0}
+      .two-col{grid-template-columns:1fr; gap:22px}
+      .section{padding:36px 0}
+    }
+
+    @media (max-width: 520px){
+      :root{
+        --header-h:86px;
+        --logo-h:34px;
+        --drawer-w:320px;
+      }
+      .brand{padding:12px 0}
+      .kicker{font-size:24px}
+      .grid-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap header-inner">
+      <div class="brand" aria-label="R/Next">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=500w"
+          alt="R/Next logo"
+        >
+      </div>
+
+      <nav aria-label="Navegação principal">
+        <a href="/">início</a>
+        <a href="/sobre">sobre</a>
+        <a class="active" href="/trabalhos">trabalhos</a>
+        <a href="/contato">contato</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu mobile" aria-hidden="true">
+    <div class="drawer-top">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/59f088cdf14aa1790f6be89b/ef430e76-7a3b-46f3-aedd-f3387c2fe3ac/Logo-RNext.png?format=300w"
+          alt="R/Next"
+          style="height:28px; width:auto; display:block;"
+        >
+      </div>
+
+      <button class="menu-btn" id="menuClose" aria-label="Fechar menu">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <nav class="drawer-nav" aria-label="Navegação mobile">
+      <a href="/">início</a>
+      <a href="/sobre">sobre</a>
+      <a class="active" href="/trabalhos">trabalhos</a>
+      <a href="/contato">contato</a>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="page">
+      <div class="wrap">
+
+        <div class="section" style="padding-top:18px;">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Campanha viral</h2>
+            </div>
+            <p class="desc">
+              No Dia Internacional da Mulher, as jogadoras do Cruzeiro entraram em campo pela Copa do Brasil com uma camisa diferente.
+              Os números nas costas mostravam estatísticas sobre as desigualdades e a violência sofridas por mulheres.
+            </p>
+          </div>
+
+          <div class="media">
+            <div class="video" aria-label="Vídeo Vimeo">
+              <iframe src="https://player.vimeo.com/video/816283574" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset.jpeg" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%281%29.jpeg" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%282%29.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/DUO1.jpg" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2019-08-02%2Bat%2B7.33.59%2BAM.png" alt="Imagem da campanha">
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2020-03-30%2Bat%2B14.49.35.png" alt="Clipping 1">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/TheWeek.jpg" alt="Clipping 2">
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/independent.jpg" alt="Clipping 3">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2020-03-30%2Bat%2B14.56.47.png" alt="Clipping 4">
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/CBS.jpg" alt="Clipping 5">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Estadao.jpg" alt="Clipping 6">
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Conteúdo para TV</h2>
+            </div>
+            <p class="desc">
+              Festas, provas do Líder, provas do Anjo e ativações de marca no BBB 20 para Americanas.com, como a festa Black Night.
+              Grandes momentos no BBB20 e resultados relevantes para Americanas.com.
+            </p>
+          </div>
+
+          <div class="media">
+            <div class="video" aria-label="Vídeo Vimeo">
+              <iframe src="https://player.vimeo.com/video/816283679" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Campanha viral</h2>
+            </div>
+            <div class="desc">
+              <p style="margin:0; font-weight:600;">ABRAz - REPEATED POST</p>
+              <div style="height:10px;"></div>
+              <p style="margin:0;">
+                Segundo a Organização Mundial da Saúde, até 2050, 135 milhões de pessoas no mundo vão conviver com Alzheimer.
+                Começando pelo craque Ronaldinho, convidamos atrizes, celebridades e influenciadores para apoiar a causa com uma ação simples:
+                <strong>postar a mesma foto 3 vezes</strong>. Os seguidores estranhariam e ficariam curiosos.
+                Depois, bastava publicar a mensagem final explicando o "erro": a <strong>repetição é rotina</strong> para quem vive com Alzheimer.
+              </p>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="video" aria-label="Vídeo Vimeo">
+              <iframe src="https://player.vimeo.com/video/816283613" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Board_Post_Repetido.jpg" alt="Peça da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Posts-Completos%2B%281%29.png" alt="Posts da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Board_Post_Repetido.jpg" alt="Peça da campanha">
+            </div>
+
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-09-21%2Bat%2B6.11.25%2BPM.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-09-21%2Bat%2B6.14.05%2BPM%2Bcopy.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-09-21%2Bat%2B6.14.05%2BPM%2Bcopy.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/BANNER%20%281%29.jpg" alt="Imagem da campanha">
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-09-24%2Bat%2B10.46.17%2BAM.png" alt="Imagem da campanha">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/POST-INGLES_quarteto.png" alt="Imagem da campanha">
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Campanha digital</h2>
+            </div>
+            <div class="desc">
+              <p style="margin:0; font-weight:600;">AMERICANAS - #WorldAnas</p>
+              <div style="height:10px;"></div>
+              <p style="margin:0;">
+                A Americanas Mundo oferece produtos internacionais do mundo inteiro.
+                Criamos versões do logo da Americanas adaptando para "Australianas", "Japonesas", "Chinesas" etc.
+                Assim, mostramos que a plataforma trabalha com o mundo todo.
+              </p>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Colors.gif" alt="Animação de cores">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/mockup1.jpg" alt="Mockup">
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/brasileiras.gif" alt="Brasileiras">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/jamaicanas%2B%281%29.gif" alt="Jamaicanas">
+            </div>
+
+            <div class="grid-2" style="grid-template-columns: 1.2fr .8fr;">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/mkp_jornal.jpg" alt="Jornal">
+              <div class="stack" style="margin-top:0;">
+                <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/californianas.gif" alt="Californianas">
+                <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/venezianas.gif" alt="Venezianas">
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/live_p1.gif" alt="Live 1">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/live_p2.gif" alt="Live 2">
+            </div>
+
+            <div class="video" aria-label="Vídeo Vimeo">
+              <iframe src="https://player.vimeo.com/video/816283865?controls=0" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Produto e mobile</h2>
+            </div>
+            <div class="desc">
+              <p style="margin:0; font-weight:600;">CONTROLL SOCKS</p>
+              <div style="height:10px;"></div>
+              <p style="margin:0;">
+                Dar meias de presente é sem graça e quase sempre gera sorrisos forçados.
+                Para acabar com essa "ingratidão", pensamos: se o sorriso não vem por vontade própria, vem "na marra".
+                Criamos a Controll Socks, meias controladas pelo celular, para fazer cócegas remotamente nos pés dos seus amigos.
+              </p>
+            </div>
+          </div>
+
+          <div class="media">
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Socks.jpg" alt="Controll Socks">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/1250.jpg" alt="Controll Socks">
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Anúncio de sticker no WhatsApp</h2>
+            </div>
+            <p class="desc">
+              Para divulgar as ofertas de Black Friday da rede de varejo Super Nosso, criamos a
+              <strong>primeira campanha com stickers de WhatsApp do mundo</strong>.
+              Nas peças, os produtos estão vazados, como se estivessem desaparecidos.
+            </p>
+          </div>
+
+          <div class="media">
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Board_STICKER.png" alt="Board Sticker">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/Screen%2BShot%2B2018-11-27%2Bat%2B9.06.02%2BAM.png" alt="Print 1">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/tela.png" alt="Tela 1">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/tela_1.png" alt="Tela 2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/telas.png" alt="Telas">
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="two-col">
+            <div>
+              <h2 class="kicker">Campanha viral</h2>
+            </div>
+            <p class="desc">
+              Invasões de campo costumam ser mal vistas. Bom, quase todas.
+              Quando um cachorro foge da segurança e corre pelo gramado, vira alegria pura.
+              Uma iniciativa do Cruzeiro e do Mineirão que usa o futebol para incentivar a adoção de pets.
+            </p>
+          </div>
+
+          <div class="media">
+            <div class="video" aria-label="Vídeo Vimeo">
+              <iframe src="https://player.vimeo.com/video/816283767" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner">
+          <img
+            src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/banner-transparente.png"
+            alt=""
+          >
+        </div>
+
+        <div class="section" style="padding-top:34px;">
+          <div class="media">
+            <div class="stack">
+              <div class="video"><iframe src="https://player.vimeo.com/video/816344212" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816283891" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816283800" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816283962" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816284013" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816283647" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816283838" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816524977" allow="fullscreen" allowfullscreen></iframe></div>
+              <div class="video"><iframe src="https://player.vimeo.com/video/816521720?controls=0" allow="fullscreen" allowfullscreen></iframe></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner">
+          <img
+            src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/banner-transparente.png"
+            alt=""
+          >
+        </div>
+
+        <div class="section" style="padding-top:34px;">
+          <div class="media">
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/af4ec7a59d5761ae05e85eacb58d09cd.jpg" alt="Print 1">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/95854974e1e0730c080ed48ae97c92bc.jpg" alt="Print 2">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/fc3ed85995725a88ed2735d1da24b9e1.jpg" alt="Print 3">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%283%29_1.jpeg" alt="Imagem 4">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%285%29.jpeg" alt="Imagem 5">
+            </div>
+          </div>
+        </div>
+
+        <div class="section" style="padding-top:0;">
+          <div class="media">
+            <div class="stack">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%287%29.jpeg" alt="Imagem 6">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%288%29.jpeg" alt="Imagem 7">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%289%29.jpeg" alt="Imagem 8">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%2810%29.jpeg" alt="Imagem 9">
+              <img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_3222836/image-asset%20%2811%29.jpeg" alt="Imagem 10">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      © 2025 R/Next. All rights reserved.
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("menuClose");
+      const overlay = document.getElementById("drawerOverlay");
+      const drawer = document.getElementById("drawer");
+
+      function openMenu(){
+        document.body.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+        overlay.setAttribute("aria-hidden", "false");
+        drawer.setAttribute("aria-hidden", "false");
+      }
+
+      function closeMenu(){
+        document.body.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+        overlay.setAttribute("aria-hidden", "true");
+        drawer.setAttribute("aria-hidden", "true");
+      }
+
+      btn.addEventListener("click", openMenu);
+      closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+
+      document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeMenu();
+      });
+
+      drawer.addEventListener("click", function(e){
+        const a = e.target && e.target.closest && e.target.closest("a");
+        if(a) closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>
